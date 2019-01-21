@@ -1,0 +1,88 @@
+<template>
+    <v-container>
+        <v-layout row>
+            <v-flex xs12>
+                <h1>Sign Up</h1>
+            </v-flex>
+        </v-layout>
+        <v-layout row justify-center>
+            <v-flex xs12 sm10 md8>
+                <v-form 
+                  v-model="valid"
+                  id="registerForm"
+                  @submit.prevent="submitRegister">
+                  <v-text-field
+                    v-model="name"
+                    label="Name"
+                    :rules="nameRules"
+                    required
+                    autofocus></v-text-field>
+                    <v-text-field
+                        v-model="email"
+                        label="Email"
+                        :rules="emailRules"
+                        required
+                    ></v-text-field>
+                    <v-text-field
+                        v-model="password"
+                        label="Password"
+                        type="password"
+                        :rules="passwordRules"
+                        required
+                    ></v-text-field>
+                    <v-text-field
+                        v-model="confirmPassword"
+                        label="Confirm password"
+                        type="password"
+                        :rules="confirmPasswordRules"
+                        required
+                    ></v-text-field>
+                    <v-btn
+                    :disabled="!valid"
+                    type="submit"
+                    form="registerForm">Sign up</v-btn>
+                </v-form>
+            </v-flex>
+        </v-layout>
+    </v-container>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    valid: false,
+    name: "",
+    nameRules: [v => !!v || "Name is required"],
+    email: "",
+    emailRules: [
+      v => !!v || "E-mail is required",
+      v => /.+@.+/.test(v) || "E-mail must be valid"
+    ],
+    password: "",
+    passwordRules: [
+      v => !!v || "Password is required",
+      v => v.length > 7 || "Password must be 8 characters or more"
+    ],
+    confirmPassword: "",
+    confirmPasswordRules: [v => !!v || "Password is required"]
+  }),
+  methods: {
+    submitRegister() {
+      if (this.password !== this.confirmPassword) {
+        console.log("Passwords must match");
+      } else {
+        // post data to login route
+        console.log("Password match");
+      }
+    }
+  }
+};
+</script>
+
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+* {
+  text-align: center;
+}
+</style>
