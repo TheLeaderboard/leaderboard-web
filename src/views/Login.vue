@@ -2,7 +2,7 @@
     <v-container>
         <v-layout row>
             <v-flex xs12>
-                <h1>Sign Up</h1>
+                <h1>Login</h1>
             </v-flex>
         </v-layout>
         <v-layout row justify-center>
@@ -10,14 +10,8 @@
                 <v-form 
                   v-model="valid"
                   ref="form"
-                  id="registerForm"
-                  @submit.prevent="submitRegister">
-                  <v-text-field
-                    v-model="name"
-                    label="Name"
-                    :rules="nameRules"
-                    required
-                    autofocus></v-text-field>
+                  id="loginForm"
+                  @submit.prevent="submitLogin">
                     <v-text-field
                         v-model="email"
                         label="Email"
@@ -31,17 +25,10 @@
                         :rules="passwordRules"
                         required
                     ></v-text-field>
-                    <v-text-field
-                        v-model="confirmPassword"
-                        label="Confirm password"
-                        type="password"
-                        :rules="confirmPasswordRules"
-                        required
-                    ></v-text-field>
                     <v-btn
                     :disabled="!valid"
                     type="submit"
-                    form="registerForm">Sign up</v-btn>
+                    form="loginForm">Login</v-btn>
                 </v-form>
             </v-flex>
         </v-layout>
@@ -52,8 +39,6 @@
 export default {
   data: () => ({
     valid: false,
-    name: "",
-    nameRules: [v => !!v || "Name is required"],
     email: "",
     emailRules: [
       v => !!v || "E-mail is required",
@@ -63,18 +48,14 @@ export default {
     passwordRules: [
       v => !!v || "Password is required",
       v => v.length > 7 || "Password must be 8 characters or more"
-    ],
-    confirmPassword: "",
-    confirmPasswordRules: [v => !!v || "Password is required"]
+    ]
   }),
   methods: {
-    submitRegister() {
+    submitLogin() {
       if (this.$refs.form.validate()) {
-        this.$store.dispatch("registerUser", {
-          name: this.name,
+        this.$store.dispatch("loginUser", {
           email: this.email,
-          password: this.password,
-          password2: this.confirmPassword
+          password: this.password
         });
       }
     }
