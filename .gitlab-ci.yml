@@ -1,0 +1,47 @@
+image: node:8.11.3
+
+stages:
+  - ver
+  - init
+  - tests
+  - build
+  - deploy
+
+variables:
+  AWS_DEFAULT_REGION: us-east-2
+  STAGING_BUCKET_NAME: leaderboard-staging
+
+ver:
+  stage: ver
+  script:
+    - node --version
+    - whoami
+
+init:
+  stage: init
+  script:
+    - npm cache verify
+    - rm -rf node-modules
+    - npm install
+
+run_tests:
+  stage: tests
+  script:
+    - echo "Add tests later"
+
+build:
+  stage: build
+  script:
+    - npm run build
+  only:
+    - master
+
+deploy_staging:
+  image: "python:latest"
+  stage: deploy
+  dependencies:
+    - build
+  before_script:
+    - pip install awscli
+  script:
+    -aws s3 cp ./dist s3://${BUCKET_NAME}/ --recursive
