@@ -23,18 +23,12 @@ init:
     - npm cache verify
     - rm -rf node-modules
     - npm install
+    - npm run build
 
 run_tests:
   stage: tests
   script:
     - echo "Add tests later"
-
-build:
-  stage: build
-  script:
-    - npm run build
-  only:
-    - master
 
 deploy_staging:
   image: "python:latest"
