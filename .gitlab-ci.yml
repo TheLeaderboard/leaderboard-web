@@ -4,7 +4,6 @@ stages:
   - ver
   - init
   - tests
-  - build
   - deploy
 
 variables:
@@ -34,7 +33,7 @@ deploy_staging:
   image: "python:latest"
   stage: deploy
   dependencies:
-    - build
+    - init
   before_script:
     - pip install awscli
   script:
