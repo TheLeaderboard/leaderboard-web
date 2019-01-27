@@ -45,3 +45,5 @@ deploy_staging:
     - pip install awscli
   script:
     -aws s3 cp ./dist s3://${BUCKET_NAME}/ --recursive
+  only:
+    - master
