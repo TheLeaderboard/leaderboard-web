@@ -46,6 +46,6 @@ deploy_staging:
   script:
     -aws s3 cp ./dist s3://${BUCKET_NAME}/ --recursive
   environment:
-    - name: staging
+    name: staging
   only:
     - master
