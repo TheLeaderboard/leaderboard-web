@@ -2,8 +2,8 @@ image: node:8.11.3
 
 stages:
   - ver
-  - build
   - tests
+  - build
   - deploy
 
 variables:
