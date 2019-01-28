@@ -37,7 +37,7 @@ build_production:
     - npm cache verify
     - rm -rf node-modules
     - npm install
-    - npm run build-build_prod
+    - npm run build-prod
     - cp -a ./dist/. ./dist_production
   artifacts:
     paths:
