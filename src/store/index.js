@@ -30,7 +30,7 @@ export default new Vuex.Store({
         password2
       };
       axios
-        .post("http://localhost:5000/api/users/register", userData)
+        .post(`${process.env.VUE_APP_API_BASE}/api/users/register`, userData)
         .then(res => {
           const { token } = res.data;
           localStorage.setItem("jwtToken", token);
@@ -52,7 +52,7 @@ export default new Vuex.Store({
         password
       };
       axios
-        .post("http://localhost:5000/api/users/login", userData)
+        .post(`${process.env.VUE_APP_API_BASE}/api/users/login`, userData)
         .then(res => {
           const { token } = res.data;
           localStorage.setItem("jwtToken", token);

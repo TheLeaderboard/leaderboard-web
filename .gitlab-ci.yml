@@ -2,7 +2,7 @@ image: node:8.11.3
 
 stages:
   - ver
-  - init
+  - build
   - tests
   - deploy
 
@@ -16,13 +16,33 @@ ver:
     - node --version
     - whoami
 
-init:
-  stage: init
+build_staging:
+  stage: build
   script:
     - npm cache verify
     - rm -rf node-modules
     - npm install
-    - npm run build
+    - npm run build-staging
+    - cp -a /dist/. /dist_staging
+  artifacts:
+    paths:
+      - dist_staging/
+  only:
+    - master
+
+build_production:
+  stage: build
+  script:
+    - npm cache verify
+    - rm -rf node-modules
+    - npm install
+    - npm run build-build_prod
+    - cp -a /dist/. /dist_production
+  artifacts:
+    paths:
+      - dist_production/
+  only:
+    - master
 
 run_tests:
   stage: tests
@@ -33,11 +53,11 @@ deploy_staging:
   image: "python:latest"
   stage: deploy
   dependencies:
-    - init
+    - build_staging
   before_script:
     - pip install awscli
   script:
-    - aws s3 cp ./dist s3://${BUCKET_NAME}/ --recursive
+    - aws s3 cp ./dist_staging s3://${STAGING_BUCKET_NAME}/ --recursive
   environment:
     name: staging
   only:
