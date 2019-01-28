@@ -23,7 +23,8 @@ build_staging:
     - rm -rf node-modules
     - npm install
     - npm run build-staging
-    - cp -a /dist/. /dist_staging
+    - ls -a
+    - cp -a ./dist/. ./dist_staging
   artifacts:
     paths:
       - dist_staging/
@@ -37,7 +38,7 @@ build_production:
     - rm -rf node-modules
     - npm install
     - npm run build-build_prod
-    - cp -a /dist/. /dist_production
+    - cp -a ./dist/. ./dist_production
   artifacts:
     paths:
       - dist_production/
