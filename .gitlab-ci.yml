@@ -9,6 +9,7 @@ stages:
 variables:
   AWS_DEFAULT_REGION: us-east-2
   STAGING_BUCKET_NAME: leaderboard-staging
+  PRODUCTION_BUCKET_NAME: leaderboard-app
 
 ver:
   stage: ver
@@ -59,8 +60,21 @@ deploy_staging:
   before_script:
     - pip install awscli
   script:
-    - ls -a
     - aws s3 cp ./dist_staging s3://${STAGING_BUCKET_NAME}/ --recursive
+  environment:
+    name: staging
+  only:
+    - master
+
+deploy_production:
+  image: "python:latest"
+  stage: deploy
+  dependencies:
+    - build_production
+  before_script:
+    - pip install awscli
+  script:
+    - aws s3 cp ./dist_production s3://${STAGING_BUCKET_NAME}/ --recursive
   environment:
     name: staging
   only:
