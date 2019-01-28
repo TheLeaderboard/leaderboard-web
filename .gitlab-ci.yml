@@ -53,11 +53,11 @@ deploy_staging:
   image: "python:latest"
   stage: deploy
   dependencies:
-    - init
+    - build_staging
   before_script:
     - pip install awscli
   script:
-    - aws s3 cp ./dist_staging s3://${BUCKET_NAME}/ --recursive
+    - aws s3 cp ./dist_staging s3://${STAGING_BUCKET_NAME}/ --recursive
   environment:
     name: staging
   only:
