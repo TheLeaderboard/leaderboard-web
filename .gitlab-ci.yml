@@ -23,8 +23,8 @@ build_staging:
     - rm -rf node-modules
     - npm install
     - npm run build-staging
-    - ls -a
     - cp -a ./dist/. ./dist_staging
+    - ls -a
   artifacts:
     paths:
       - dist_staging/
@@ -39,6 +39,7 @@ build_production:
     - npm install
     - npm run build-prod
     - cp -a ./dist/. ./dist_production
+    - ls -a
   artifacts:
     paths:
       - dist_production/
@@ -58,6 +59,7 @@ deploy_staging:
   before_script:
     - pip install awscli
   script:
+    - ls -a
     - aws s3 cp ./dist_staging s3://${STAGING_BUCKET_NAME}/ --recursive
   environment:
     name: staging
