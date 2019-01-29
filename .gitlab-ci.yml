@@ -63,6 +63,7 @@ deploy_staging:
     - aws s3 cp ./dist_staging s3://${STAGING_BUCKET_NAME}/ --recursive
   environment:
     name: staging
+    url: duxak6lhh3i6g.cloudfront.net
   only:
     - master
 
@@ -76,6 +77,7 @@ deploy_production:
   script:
     - aws s3 cp ./dist_production s3://${STAGING_BUCKET_NAME}/ --recursive
   environment:
-    name: staging
+    name: production
+    url: d1vvxvfg7czwim.cloudfront.net
   only:
     - master
