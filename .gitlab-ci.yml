@@ -81,3 +81,4 @@ deploy_production:
     url: d1vvxvfg7czwim.cloudfront.net
   only:
     - master
+  when: manual
