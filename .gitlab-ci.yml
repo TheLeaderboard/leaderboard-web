@@ -75,7 +75,7 @@ deploy_production:
   before_script:
     - pip install awscli
   script:
-    - aws s3 cp ./dist_production s3://${STAGING_BUCKET_NAME}/ --recursive
+    - aws s3 cp ./dist_production s3://${PRODUCTION_BUCKET_NAME}/ --recursive
   environment:
     name: production
     url: d1vvxvfg7czwim.cloudfront.net
