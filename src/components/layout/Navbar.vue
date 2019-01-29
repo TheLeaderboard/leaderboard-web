@@ -1,7 +1,7 @@
 <template>
   <nav>
     <v-toolbar dark color="primary">
-      <router-link to="/"><v-toolbar-title class="white--text">Leaderboard</v-toolbar-title></router-link>
+      <router-link to="/"><v-toolbar-title class="white--text">{{appTitle}}</v-toolbar-title></router-link>
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
@@ -49,6 +49,11 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      appTitle: process.env.VUE_APP_TITLE
+    };
+  },
   computed: {
     user() {
       return this.$store.getters.getUser;
