@@ -9,16 +9,23 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: null
+    user: null,
+    isAuthenticated: false
   },
   getters: {
     getUser(state) {
       return state.user;
+    },
+    getIsAuthenticated(state) {
+      return state.isAuthenticated;
     }
   },
   mutations: {
     setUser(state, payload) {
       state.user = payload;
+    },
+    setIsAuthenticated(state, payload) {
+      state.isAuthenticated = payload;
     }
   },
   actions: {
@@ -66,6 +73,11 @@ export default new Vuex.Store({
     },
     setCurrentUser({ commit }, payload) {
       commit("setUser", payload);
+      if (payload === null) {
+        commit("setIsAuthenticated", false);
+      } else {
+        commit("setIsAuthenticated", true);
+      }
     },
     logoutUser({ dispatch }) {
       localStorage.removeItem("jwtToken");

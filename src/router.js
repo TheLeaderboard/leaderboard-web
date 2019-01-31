@@ -3,27 +3,58 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Register from "@/views/Register.vue";
 import Login from "@/views/Login.vue";
+import store from "@/store";
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
-      name: "home",
+      name: "landing",
       component: Home
     },
     {
       path: "/register",
       name: "register",
-      component: Register
+      component: Register,
+      meta: {
+        guest: true
+      }
     },
     {
       path: "/login",
       name: "login",
-      component: Login
+      component: Login,
+      meta: {
+        guest: true
+      }
+    },
+    {
+      path: "/home",
+      name: "home",
+      component: Home,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const isAuthenticated = store.getters.getIsAuthenticated;
+  const guest = to.matched.some(record => record.meta.guest);
+
+  if (requiresAuth && !isAuthenticated) {
+    next("login");
+  } else if (guest && isAuthenticated) {
+    next("home");
+  } else {
+    next();
+  }
+});
+
+export default router;
