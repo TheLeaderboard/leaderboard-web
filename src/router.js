@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import Register from "@/views/Register.vue";
 import Login from "@/views/Login.vue";
 import store from "@/store";
+import Landing from "@/views/Landing.vue";
 
 Vue.use(Router);
 
@@ -14,7 +15,7 @@ let router = new Router({
     {
       path: "/",
       name: "landing",
-      component: Home
+      component: Landing
     },
     {
       path: "/register",

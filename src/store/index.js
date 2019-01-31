@@ -47,6 +47,7 @@ export default new Vuex.Store({
           const decoded = jwtDecode(token);
           // set current user
           dispatch("setCurrentUser", decoded);
+          router.push("/home");
         })
         .catch(err => {
           //handle errors, potentially dispatch an error handling action
@@ -66,6 +67,7 @@ export default new Vuex.Store({
           setAuthToken(token);
           const decoded = jwtDecode(token);
           dispatch("setCurrentUser", decoded);
+          router.push("/home");
         })
         .catch(err => {
           console.log(err);
