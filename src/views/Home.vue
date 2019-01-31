@@ -1,12 +1,17 @@
 <template>
   <div>
-    Home page
+    Hello {{ user }}
   </div>
 </template>
 
 <script>
 export default {
-  name: "home"
+  name: "Home",
+  computed: {
+    user() {
+      return this.$store.getters.getUser;
+    }
+  }
 };
 </script>
 

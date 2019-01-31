@@ -1,49 +1,56 @@
 <template>
-  <nav>
-    <v-toolbar dark color="primary">
-      <router-link to="/"><v-toolbar-title class="white--text">{{appTitle}}</v-toolbar-title></router-link>
-      <v-spacer></v-spacer>
-
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn v-if="!user" flat to="/login">
-        Login
-        </v-btn>
-
-        <v-btn v-if="!user" flat to="/register">
-        Sign Up
-        </v-btn>
-
-        <v-btn v-if="user" flat to="/profile">
-        Profile
-        </v-btn>
-
-        <v-btn v-if="user" flat v-on:click="logout">
-        Logout
-        </v-btn>
-      </v-toolbar-items>
-
-      <v-menu :nudge-width="100" class="hidden-md-and-up">
-          <v-toolbar-title slot="activator">
-            <v-icon dark>menu</v-icon>
-          </v-toolbar-title>
-  
-          <v-list class="small-menu">
-            <v-list-tile v-if="!user">
-              <router-link  to="/login"><v-list-tile-title>Login</v-list-tile-title></router-link>
-            </v-list-tile>
-            <v-list-tile v-if="!user">
-              <router-link to="/register"><v-list-tile-title>Sign Up</v-list-tile-title></router-link>
-            </v-list-tile>
-            <v-list-tile v-if="user">
-              <v-list-tile-title>Profile</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile v-if="user" v-on:click="logout">
-              <v-list-tile-title>Logout</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
+  <span>
+    <v-navigation-drawer app v-model="drawer" class="primary darken-4" dark disable-resize-watcher>
+      <v-list>
+        <div v-if="!isAuthenticated">
+          <v-list-tile to="/login">
+            <v-list-tile-content>
+              Login
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile to="/register">
+            <v-list-tile-content>
+              Sign Up
+            </v-list-tile-content>
+          </v-list-tile>
+        </div>
+        <div v-if="isAuthenticated">
+          <v-list-tile to="/home">
+            <v-list-tile-content>
+              Home
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile to="/profile">
+            <v-list-tile-content>
+              Profile
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile @click="logout">
+            <v-list-tile-content>
+              Logout
+            </v-list-tile-content>
+          </v-list-tile>
+        </div>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar app color="primary darken-2" dark>
+      <v-toolbar-side-icon class="hidden-md-and-up" @click="drawer =!drawer"></v-toolbar-side-icon>
+      <v-spacer class="hidden-md-and-up"></v-spacer>
+      <router-link to="/">
+        <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
+      </router-link>
+      <v-spacer class="hidden-sm-and-down"></v-spacer>
+      <div v-if="!isAuthenticated" class="hidden-sm-and-down">
+        <v-btn flat to="/login">Login</v-btn>
+        <v-btn color="primary lighten-1" to="/register">Sign Up</v-btn>
+      </div>
+      <div v-if="isAuthenticated" class="hidden-sm-and-down">
+        <v-btn flat to="/home">Home</v-btn>
+        <v-btn flat to="/profile">Profile</v-btn>
+        <v-btn outline @click="logout">Logout</v-btn>
+      </div>
     </v-toolbar>
-  </nav>
+  </span>
 </template>
 
 <script>
@@ -51,11 +58,15 @@ export default {
   name: "Navbar",
   data() {
     return {
-      appTitle: process.env.VUE_APP_TITLE
+      appTitle: process.env.VUE_APP_TITLE,
+      drawer: false
     };
   },
   computed: {
     user() {
+      return this.$store.getters.getUser;
+    },
+    isAuthenticated() {
       return this.$store.getters.getUser;
     }
   },
@@ -68,7 +79,8 @@ export default {
 </script>
 
 <style scoped>
-.small-menu {
-  text-transform: uppercase;
+a {
+  text-decoration: none;
+  color: white;
 }
 </style>

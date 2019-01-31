@@ -1,12 +1,13 @@
 import Vue from "vue";
 import Vuetify from "vuetify/lib";
 import "vuetify/src/stylus/app.styl";
+import colors from "vuetify/es5/util/colors";
 
 Vue.use(Vuetify, {
   theme: {
-    primary: "#6200ea",
+    primary: colors.lightBlue,
     secondary: "#424242",
-    accent: "#82B1FF",
+    accent: "#FF4A0C",
     error: "#FF5252",
     info: "#2196F3",
     success: "#4CAF50",
