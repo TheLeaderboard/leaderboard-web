@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build-staging": "vue-cli-service build --mode staging",
     "build-prod": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test:unit": "nyc --reporter=lcov --reporter=text vue-cli-service test:unit"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -19,13 +20,18 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-e2e-cypress": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-plugin-pwa": "^3.3.0",
+    "@vue/cli-plugin-unit-mocha": "^3.4.0",
     "@vue/cli-service": "^3.3.0",
     "@vue/eslint-config-prettier": "^4.0.1",
+    "@vue/test-utils": "^1.0.0-beta.28",
     "babel-eslint": "^10.0.1",
+    "chai": "^4.2.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "nyc": "^13.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.4.6",
