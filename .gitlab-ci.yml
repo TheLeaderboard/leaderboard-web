@@ -21,7 +21,7 @@ unit_tests:
   stage: tests
   script:
     - npm install
-    - npm run test
+    - npm run test:unit
 
 build_staging:
   stage: build
