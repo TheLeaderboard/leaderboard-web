@@ -17,6 +17,12 @@ ver:
     - node --version
     - whoami
 
+unit_tests:
+  stage: tests
+  script:
+    - npm install
+    - npm run test
+
 build_staging:
   stage: build
   script:
@@ -46,11 +52,6 @@ build_production:
       - dist_production/
   only:
     - master
-
-run_tests:
-  stage: tests
-  script:
-    - echo "Add tests later"
 
 deploy_staging:
   image: "python:latest"
