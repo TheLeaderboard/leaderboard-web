@@ -20,10 +20,23 @@
           :key="`divider${index}`"></v-divider>
         <v-list-tile
           :key="index">
+          <v-list-tile-avatar>
+            <v-tooltip top>
+              <v-icon
+                slot="activator"
+                v-if="league.commissioner">supervisor_account</v-icon>
+              <span>You manage this league</span>
+            </v-tooltip>
+          </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>{{ league.name }}</v-list-tile-title>
             <v-list-tile-sub-title>{{ league.teamName }}</v-list-tile-sub-title>
           </v-list-tile-content>
+          <v-list-tile-action>
+            <v-icon>
+              arrow_drop_down_circle
+            </v-icon>
+          </v-list-tile-action>
         </v-list-tile>
       </template>
     </v-list>
@@ -40,7 +53,13 @@ export default {
           id: "1",
           name: "Euchre Pros",
           teamName: "SteenEngine",
-          game: "Euchre"
+          commissioner: false
+        },
+        {
+          id: "2",
+          name: "Hoop Dreams",
+          teamName: "MonStars",
+          commissioner: true
         }
       ]
     };
