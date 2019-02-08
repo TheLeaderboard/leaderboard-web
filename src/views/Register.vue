@@ -6,7 +6,7 @@
             </v-flex>
         </v-layout>
         <v-layout row justify-center>
-            <v-flex xs12 sm10 md8>
+            <v-flex xs12 sm10 md8 lg6>
                 <v-form 
                   v-model="valid"
                   ref="form"

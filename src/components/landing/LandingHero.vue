@@ -1,12 +1,12 @@
 <template>
   <v-container fluid fill-height class="hero">
     <v-layout justify-center align-center column pa-5>
-      <div class="display-4 font-weight-black text-xs-center primary--text text--darken-4">
+      <div class="display-4 font-weight-black text-xs-center white--text">
         {{ appTitle }}
       </div>
-      <div class="display-1 font-weight-bold text-xs-center">
+      <!-- <div class="display-1 font-weight-bold text-xs-center">
         Tagline goes here
-      </div>
+      </div> -->
     </v-layout>
   </v-container>
 </template>
@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
 .hero {
-  background: url("https://source.unsplash.com/QJCJYfC1uzw") center;
+  background: url("https://source.unsplash.com/kOfVxiO1LOk") center;
   background-size: cover;
   width: 100%;
   height: 100%;
