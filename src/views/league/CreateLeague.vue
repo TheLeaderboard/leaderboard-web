@@ -12,7 +12,10 @@
             <v-stepper-step
               step="2"
               :complete="el > 2"
-              :editable="validInfo">League Rules</v-stepper-step>
+              :editable="validInfo">
+                Invite Friends
+                <small>Optional</small>
+              </v-stepper-step>
               <v-divider v-if="el > 1"></v-divider>
             <v-stepper-step
               step="3"
