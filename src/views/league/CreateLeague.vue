@@ -12,11 +12,12 @@
             <v-stepper-step
               step="2"
               :complete="el > 2"
-              editable>League Rules</v-stepper-step>
+              :editable="validInfo">League Rules</v-stepper-step>
               <v-divider v-if="el > 1"></v-divider>
             <v-stepper-step
               step="3"
-              :complete="el > 3">Review</v-stepper-step>
+              :complete="el > 3"
+              :editable="validInfo && validRules">Review</v-stepper-step>
           </v-stepper-header>
           <v-stepper-items>
             <v-stepper-content step="1">
@@ -29,10 +30,13 @@
                       name="leagueName"
                       label="League name"
                       v-model="leagueName"
+                      :rules="leagueNameRules"
+                      autofocus
                       required></v-text-field>
                     <v-autocomplete
-                      v-model="gameModel"
+                      v-model="gameType"
                       :items="gameTypes"
+                      :rules="gameTypeRules"
                       clearable
                       hint="Pick a game"
                       persistent-hint
@@ -44,6 +48,7 @@
                   <v-spacer></v-spacer>
                   <v-btn
                     color="primary"
+                    :disabled="!validInfo"
                     @click="el++">Next</v-btn>
                 </v-card-actions>
               </v-card>
@@ -63,10 +68,32 @@
             </v-stepper-content>
             <v-stepper-content step="3">
               <v-card>
+                <v-card-text>
+                  <v-form
+                    ref="reviewForm"
+                    v-model="validReview">
+                    <div class="headline">Basic Information</div>
+                    <v-text-field
+                      name="leagueName"
+                      label="League name"
+                      v-model="leagueName"
+                      :rules="leagueNameRules"
+                      readonly></v-text-field>
+                    <v-text-field
+                      name="gameType"
+                      label="Game"
+                      :rules="gameTypeRules"
+                      v-model="gameTypeName"
+                      readonly></v-text-field>
+                  </v-form>
+                </v-card-text>
                 <v-card-actions>
                   <v-btn flat color="primary" @click="el--">Previous</v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" @click="createLeague">Create League</v-btn>
+                  <v-btn
+                    color="primary"
+                    :disabled="!validReview"
+                    @click="createLeague">Create League</v-btn>
                 </v-card-actions>
               </v-card>
             </v-stepper-content>
@@ -84,9 +111,12 @@ export default {
     return {
       el: 1,
       validInfo: false,
-      validRules: false,
-      gameModel: null,
+      validRules: true,
+      validReview: false,
+      gameType: null,
       leagueName: "",
+      leagueNameRules: [v => (v || "").length > 0 || "League name is required"],
+      gameTypeRules: [v => (v || "").length > 0 || "Game type is required"],
       gameTypes: [
         {
           text: "Basketball",
@@ -98,6 +128,18 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    gameTypeName() {
+      var filteredTypes = this.gameTypes.filter(game => {
+        return game.value === this.gameType;
+      });
+      if (filteredTypes.length > 0) {
+        return filteredTypes[0].text;
+      } else {
+        return "";
+      }
+    }
   },
   methods: {
     createLeague() {
