@@ -3,12 +3,9 @@
     <v-toolbar color="grey lighten-3" elevation="3">
       <v-toolbar-title>My Leagues</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-tooltip top>
-        <v-btn icon slot="activator" to="/league/create">
-          <v-icon>add</v-icon>
-        </v-btn>
-        <span>Create new league</span>
-      </v-tooltip>
+      <v-btn icon to="/league/create">
+        <v-icon>add</v-icon>
+      </v-btn>
     </v-toolbar>
     <v-list two-line>
       <v-list-tile v-if="leagues.length === 0">
