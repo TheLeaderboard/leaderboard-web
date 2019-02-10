@@ -4,7 +4,7 @@
       <v-toolbar-title>My Leagues</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tooltip top>
-        <v-btn icon slot="activator">
+        <v-btn icon slot="activator" to="/league/create">
           <v-icon>add</v-icon>
         </v-btn>
         <span>Create new league</span>
