@@ -8,15 +8,16 @@
       </v-btn>
     </v-toolbar>
     <v-list two-line>
-      <v-list-tile v-if="leagues.length === 0">
+      <v-list-tile v-if="myLeagues.length === 0">
         <v-list-tile-title>No leagues yet</v-list-tile-title>
       </v-list-tile>
-      <template v-for="(league, index) in leagues">
+      <template v-for="(league, index) in myLeagues">
         <v-divider
           v-if="index !== 0"
           :key="`divider${index}`"></v-divider>
         <v-list-tile
-          :key="index">
+          :key="index"
+          :to="`/league/${league.id}`">
           <v-list-tile-avatar>
             <v-tooltip top>
               <v-icon
@@ -30,9 +31,12 @@
             <v-list-tile-sub-title>{{ league.teamName }}</v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
-            <v-icon>
-              arrow_drop_down_circle
-            </v-icon>
+            <v-badge left>
+              <span slot="badge">2</span>
+              <v-icon>
+                chat
+              </v-icon>
+            </v-badge>
           </v-list-tile-action>
         </v-list-tile>
       </template>
@@ -43,28 +47,13 @@
 <script>
 export default {
   name: "MyLeagues",
-  data() {
-    return {
-      leagues: [
-        {
-          id: "1",
-          name: "Euchre Pros",
-          teamName: "SteenEngine",
-          commissioner: false
-        },
-        {
-          id: "2",
-          name: "Hoop Dreams",
-          teamName: "MonStars",
-          commissioner: true
-        }
-      ]
-    };
-  },
   computed: {
-    user() {
-      return this.$store.state.user;
+    myLeagues() {
+      return this.$store.state.myLeagues;
     }
+  },
+  mounted() {
+    this.$store.dispatch("loadMyLeagues");
   }
 };
 </script>

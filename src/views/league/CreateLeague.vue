@@ -122,17 +122,25 @@ export default {
       leagueName: "",
       leagueNameRules: [v => (v || "").length > 0 || "League name is required"],
       gameTypeRules: [v => (v || "").length > 0 || "Game type is required"],
-      gameTypes: [
-        {
-          text: "Basketball",
-          value: "5c6255851c9d440000afc753"
-        },
-        {
-          text: "Euchre",
-          value: "5c62558f1c9d440000afc754"
-        }
-      ]
+      gameTypes: []
     };
+  },
+  mounted() {
+    axios
+      .get(`${process.env.VUE_APP_API_BASE}/api/gameDefinitions`)
+      .then(res => {
+        if (res.data.success) {
+          res.data.game_definitions.forEach(gameDef => {
+            this.gameTypes.push({
+              text: gameDef.name,
+              value: gameDef._id
+            });
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   },
   computed: {
     gameTypeName() {
@@ -148,8 +156,6 @@ export default {
   },
   methods: {
     createLeague() {
-      console.log("create league");
-      console.log(process.env.VUE_APP_API_BASE);
       const leagueData = {
         name: this.leagueName,
         gameType: this.gameType
@@ -158,7 +164,6 @@ export default {
         .post(`${process.env.VUE_APP_API_BASE}/api/leagues/create`, leagueData)
         .then(res => {
           if (res.data.success) {
-            console.log(res.data.league);
             this.$router.push(`/league/${res.data.league._id}`);
           }
         })
