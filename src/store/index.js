@@ -10,7 +10,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
-    isAuthenticated: false
+    isAuthenticated: false,
+    myLeagues: []
   },
   getters: {
     getUser(state) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     setIsAuthenticated(state, payload) {
       state.isAuthenticated = payload;
+    },
+    setMyLeagues(state, payload) {
+      state.myLeagues = payload;
     }
   },
   actions: {
@@ -86,6 +90,27 @@ export default new Vuex.Store({
       setAuthToken(false);
       dispatch("setCurrentUser", null);
       router.push("/");
+    },
+    loadMyLeagues({ commit, state }) {
+      axios
+        .get(`${process.env.VUE_APP_API_BASE}/api/leagues`)
+        .then(res => {
+          if (res.data.success) {
+            var loadedLeagues = [];
+            res.data.myLeagues.forEach(league => {
+              loadedLeagues.push({
+                id: league._id,
+                name: league.name,
+                game_type: league.game_type,
+                commissioner: league.commissioner === state.user.id
+              });
+            });
+            commit("setMyLeagues", loadedLeagues);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 });
