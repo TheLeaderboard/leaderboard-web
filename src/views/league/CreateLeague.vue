@@ -108,6 +108,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "CreateLeague",
   data() {
@@ -123,11 +125,11 @@ export default {
       gameTypes: [
         {
           text: "Basketball",
-          value: "1"
+          value: "5c6255851c9d440000afc753"
         },
         {
           text: "Euchre",
-          value: "2"
+          value: "5c62558f1c9d440000afc754"
         }
       ]
     };
@@ -146,7 +148,20 @@ export default {
   },
   methods: {
     createLeague() {
-      console.log("Create League");
+      console.log("create league");
+      console.log(process.env.VUE_APP_API_BASE);
+      const leagueData = {
+        name: this.leagueName,
+        gameType: this.gameType
+      };
+      axios
+        .post(`${process.env.VUE_APP_API_BASE}/api/leagues/create`, leagueData)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
