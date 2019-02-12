@@ -157,7 +157,10 @@ export default {
       axios
         .post(`${process.env.VUE_APP_API_BASE}/api/leagues/create`, leagueData)
         .then(res => {
-          console.log(res);
+          if (res.data.success) {
+            console.log(res.data.league);
+            this.$router.push(`/league/${res.data.league._id}`);
+          }
         })
         .catch(err => {
           console.log(err);

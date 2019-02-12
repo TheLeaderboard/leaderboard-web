@@ -6,6 +6,7 @@ import Login from "@/views/Login.vue";
 import store from "@/store";
 import Landing from "@/views/Landing.vue";
 import CreateLeague from "@/views/league/CreateLeague.vue";
+import ViewLeague from "@/views/league/ViewLeague.vue";
 
 Vue.use(Router);
 
@@ -46,6 +47,14 @@ let router = new Router({
       path: "/league/create",
       name: "leagueCreate",
       component: CreateLeague,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/league/:id",
+      name: "leagueView",
+      component: ViewLeague,
       meta: {
         requiresAuth: true
       }
