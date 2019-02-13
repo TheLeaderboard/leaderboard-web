@@ -5,6 +5,7 @@ import Register from "@/views/Register.vue";
 import Login from "@/views/Login.vue";
 import store from "@/store";
 import Landing from "@/views/Landing.vue";
+import Profile from "@/views/Profile.vue";
 import CreateLeague from "@/views/league/CreateLeague.vue";
 import ViewLeague from "@/views/league/ViewLeague.vue";
 
@@ -39,6 +40,14 @@ let router = new Router({
       path: "/home",
       name: "home",
       component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
       meta: {
         requiresAuth: true
       }

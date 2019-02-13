@@ -60,7 +60,25 @@
               <v-card>
                 <v-card-text>
                   <v-form
-                    ref="rulesForm"></v-form>
+                    ref="rulesForm">
+                    <v-combobox
+                      v-model="emailChips"
+                      chips
+                      label="Email addresses"
+                      append-icon=""
+                      clearable
+                      solo
+                      multiple>
+                      <template slot="selection" slot-scope="data">
+                        <v-chip
+                          :selected="data.selected"
+                          close
+                          @input="removeChip(data.item)">
+                          <span>{{ data.item }}</span>
+                        </v-chip>
+                      </template>  
+                    </v-combobox>
+                  </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-btn flat color="primary" @click="el--">Previous</v-btn>
@@ -88,6 +106,19 @@
                       :rules="gameTypeRules"
                       v-model="gameTypeName"
                       readonly></v-text-field>
+                    <div
+                      class="headline"
+                      v-show="emailChips.length > 0">Invited Friends</div>
+                    <v-combobox
+                      v-model="emailChips"
+                      append-icon=""
+                      chips
+                      label="Email addresses"
+                      readonly
+                      solo
+                      multiple
+                      v-show="emailChips.length > 0">
+                    </v-combobox>
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -119,6 +150,7 @@ export default {
       validRules: true,
       validReview: false,
       gameType: null,
+      emailChips: [],
       leagueName: "",
       leagueNameRules: [v => (v || "").length > 0 || "League name is required"],
       gameTypeRules: [v => (v || "").length > 0 || "Game type is required"],
@@ -170,6 +202,10 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    removeChip(item) {
+      this.emailChips.splice(this.emailChips.indexOf(item), 1);
+      this.emailChips = [...this.emailChips];
     }
   }
 };
