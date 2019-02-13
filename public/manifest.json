@@ -1,6 +1,6 @@
 {
-  "name": "leaderboard-web",
-  "short_name": "leaderboard-web",
+  "name": "Leaderboard",
+  "short_name": "Leaderboard",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
