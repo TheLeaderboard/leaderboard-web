@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build-staging": "vue-cli-service build --mode staging",
-    "build-prod": "vue-cli-service build",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "nyc --reporter=lcov --reporter=text vue-cli-service test:unit"
   },

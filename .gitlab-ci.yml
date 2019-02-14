@@ -44,7 +44,7 @@ build_production:
     - npm cache verify
     - rm -rf node-modules
     - npm install
-    - npm run build-prod
+    - npm run build
     - cp -a ./dist/. ./dist_production
     - ls -a
   artifacts:
