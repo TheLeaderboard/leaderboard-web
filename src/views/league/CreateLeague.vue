@@ -190,7 +190,8 @@ export default {
     createLeague() {
       const leagueData = {
         name: this.leagueName,
-        gameType: this.gameType
+        gameType: this.gameType,
+        invitedEmails: this.emailChips
       };
       axios
         .post(`${process.env.VUE_APP_API_BASE}/api/leagues/create`, leagueData)
