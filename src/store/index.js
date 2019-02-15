@@ -33,10 +33,11 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    registerUser({ dispatch }, { name, email, password, password2 }) {
+    registerUser({ dispatch }, { name, email, password, password2, username }) {
       const userData = {
         name,
         email,
+        username,
         password,
         password2
       };

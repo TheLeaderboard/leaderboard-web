@@ -13,11 +13,16 @@
                   id="registerForm"
                   @submit.prevent="submitRegister">
                   <v-text-field
+                    v-model="username"
+                    label="Username"
+                    :rules="usernameRules"
+                    required
+                    autofocus></v-text-field>
+                  <v-text-field
                     v-model="name"
                     label="Name"
                     :rules="nameRules"
-                    required
-                    autofocus></v-text-field>
+                    required></v-text-field>
                     <v-text-field
                         v-model="email"
                         label="Email"
@@ -52,6 +57,8 @@
 export default {
   data: () => ({
     valid: false,
+    username: "",
+    usernameRules: [v => !!v || "Username is required"],
     name: "",
     nameRules: [v => !!v || "Name is required"],
     email: "",
@@ -72,6 +79,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.$store.dispatch("registerUser", {
           name: this.name,
+          username: this.username,
           email: this.email,
           password: this.password,
           password2: this.confirmPassword
