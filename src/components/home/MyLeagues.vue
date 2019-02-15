@@ -31,7 +31,7 @@
             <v-list-tile-sub-title>{{ league.teamName }}</v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
-            <v-badge left>
+            <v-badge v-show="false" left>
               <span slot="badge">2</span>
               <v-icon>
                 chat
