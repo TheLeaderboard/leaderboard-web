@@ -63,11 +63,8 @@ export default {
     };
   },
   computed: {
-    user() {
-      return this.$store.getters.getUser;
-    },
     isAuthenticated() {
-      return this.$store.getters.getUser;
+      return this.$store.state.isAuthenticated;
     }
   },
   methods: {

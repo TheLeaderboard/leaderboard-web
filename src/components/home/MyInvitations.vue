@@ -4,7 +4,7 @@
       <v-toolbar-title>Pending Invitations</v-toolbar-title>
     </v-toolbar>
     <v-list two-line>
-      <template v-for="(invitation, index) in invitations">
+      <template v-for="(invitation, index) in myInvitations">
         <v-divider
           v-if="index !== 0"
           :key="`divider${index}`"></v-divider>
@@ -35,20 +35,20 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
- name: "MyInvitations",
- props: {
-   invitations: {
-     type: Array
-   }
- },
- methods: {
-   respondToInvite(invitation, accepted) {
-     console.log(invitation);
-   }
- }
+  name: "MyInvitations",
+  computed: {
+    myInvitations() {
+      return this.$store.state.myInvitations;
+    }
+  },
+  methods: {
+    respondToInvite(invitation, accepted) {
+      console.log(invitation);
+      // reload invitations
+      this.$store.dispatch("loadMyInvitations");
+    }
+  }
 };
 </script>
 

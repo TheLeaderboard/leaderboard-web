@@ -79,7 +79,7 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  const isAuthenticated = store.getters.getIsAuthenticated;
+  const isAuthenticated = store.state.isAuthenticated;
   const guest = to.matched.some(record => record.meta.guest);
 
   if (requiresAuth && !isAuthenticated) {
