@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "MyInvitations",
   computed: {
@@ -44,9 +46,21 @@ export default {
   },
   methods: {
     respondToInvite(invitation, accepted) {
-      console.log(invitation);
+      console.log(invitation._id);
+      axios
+        .put(
+          `${process.env.VUE_APP_API_BASE}/api/invitations/${invitation._id}`,
+          { accepted: accepted, leagueId: invitation.league_id._id }
+        )
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
       // reload invitations
       this.$store.dispatch("loadMyInvitations");
+      this.$store.dispatch("loadMyLeagues");
     }
   }
 };
