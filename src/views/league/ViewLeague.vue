@@ -1,17 +1,38 @@
 <template>
-  <div>
-    {{ leagueData }}
-  </div>
+  <v-container>
+    <v-layout row wrap>
+      <v-flex xs12 text-xs-center class="my-2">
+        <div class="display-1 font-weight-medium">
+          {{ leagueData.name }}
+        </div>
+      </v-flex>
+      <v-flex xs12 text-xs-center class="my-2">
+        <div class="subheading">
+          {{ leagueData.game_type.name }}
+        </div>
+      </v-flex>
+      <v-flex xs12 md6 lg4 class="mx-2">
+        <LeagueInvitations 
+          :leagueId="this.$route.params.id"/>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
 import axios from "axios";
+import LeagueInvitations from "@/components/league/LeagueInvitations.vue";
 
 export default {
   name: "ViewLeague",
+  components: {
+    LeagueInvitations: LeagueInvitations
+  },
   data() {
     return {
-      leagueData: null
+      leagueData: {
+        game_type: {}
+      }
     };
   },
   mounted() {
