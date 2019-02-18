@@ -1,6 +1,16 @@
 <template>
   <v-container>
-    <v-layout row>
+    <v-layout row wrap>
+      <v-flex xs12 text-xs-center class="my-2">
+        <div class="display-1 font-weight-medium">
+          {{ leagueData.name }}
+        </div>
+      </v-flex>
+      <v-flex xs12 text-xs-center class="my-2">
+        <div class="subheading">
+          {{ leagueData.game_type.name }}
+        </div>
+      </v-flex>
       <v-flex xs12 md6 lg4 class="mx-2">
         <LeagueInvitations 
           :leagueId="this.$route.params.id"/>
@@ -20,7 +30,9 @@ export default {
   },
   data() {
     return {
-      leagueData: null
+      leagueData: {
+        game_type: {}
+      }
     };
   },
   mounted() {
@@ -31,7 +43,6 @@ export default {
       .then(res => {
         if (res.data.success) {
           this.leagueData = res.data.league;
-          console.log(res.data);
         }
       })
       .catch(err => {
