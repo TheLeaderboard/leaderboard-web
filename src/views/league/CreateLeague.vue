@@ -60,7 +60,7 @@
               <v-card>
                 <v-card-text>
                   <v-form
-                    ref="rulesForm">
+                    ref="inviteForm">
                     <v-combobox
                       v-model="emailChips"
                       chips
