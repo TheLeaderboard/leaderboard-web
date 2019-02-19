@@ -8,12 +8,24 @@
         <v-spacer></v-spacer>
         <v-btn
           icon
+          v-if="!showList && leagueInvitations.length > 0"
+          @click="showList = true">
+          <v-icon>expand_more</v-icon>
+        </v-btn>
+        <v-btn
+          icon
+          v-if="showList && leagueInvitations.length > 0"
+          @click="showList = false">
+          <v-icon>expand_less</v-icon>
+        </v-btn>
+        <v-btn
+          icon
           @click="isModalVisible = true">
           <v-icon>add</v-icon>
         </v-btn>
       </v-toolbar>
       <v-list 
-        v-if="leagueInvitations.length > 0"
+        v-if="leagueInvitations.length > 0 && showList"
         two-line>
         <template v-for="(invitation, index) in leagueInvitations">
           <v-divider
@@ -54,6 +66,7 @@ export default {
   data() {
     return {
       isModalVisible: false,
+      showList: true,
       leagueInvitations: []
     };
   },
