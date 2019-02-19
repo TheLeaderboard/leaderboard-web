@@ -79,7 +79,7 @@ deploy_production:
     - aws s3 cp ./dist_production s3://${PRODUCTION_BUCKET_NAME}/ --recursive
   environment:
     name: production
-    url: d1vvxvfg7czwim.cloudfront.net
+    url: www.theleaderboardapp.com
   only:
     - master
   when: manual
