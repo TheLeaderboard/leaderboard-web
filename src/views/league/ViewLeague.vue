@@ -12,6 +12,10 @@
         </div>
       </v-flex>
       <v-flex xs12 md6 lg4 class="mx-2">
+        <LeagueMembers 
+          :members="leagueData.members" />
+      </v-flex>
+      <v-flex xs12 md6 lg4 class="mx-2">
         <LeagueInvitations 
           :leagueId="this.$route.params.id"/>
       </v-flex>
@@ -21,17 +25,20 @@
 
 <script>
 import axios from "axios";
+import LeagueMembers from "@/components/league/LeagueMembers.vue";
 import LeagueInvitations from "@/components/league/LeagueInvitations.vue";
 
 export default {
   name: "ViewLeague",
   components: {
+    LeagueMembers: LeagueMembers,
     LeagueInvitations: LeagueInvitations
   },
   data() {
     return {
       leagueData: {
-        game_type: {}
+        game_type: {},
+        members: []
       }
     };
   },
