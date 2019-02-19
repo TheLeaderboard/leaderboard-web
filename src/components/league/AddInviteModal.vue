@@ -66,7 +66,9 @@ export default {
     return {
       valid: false,
       emailChips: [],
-      comboboxRules: [ v => (v || []).length > 0 || "Email addresses are required"]
+      comboboxRules: [
+        v => (v || []).length > 0 || "Email addresses are required"
+      ]
     };
   },
   methods: {
@@ -77,10 +79,13 @@ export default {
         emails: this.emailChips
       };
       axios
-        .post(`${process.env.VUE_APP_API_BASE}/api/invitations/create`, inviteData)
+        .post(
+          `${process.env.VUE_APP_API_BASE}/api/invitations/create`,
+          inviteData
+        )
         .then(res => {
           console.log(res.data);
-          if(res.data.success) {
+          if (res.data.success) {
             this.emailChips = [];
             this.$emit("reloadInvites");
             this.$emit("close");
