@@ -1,7 +1,7 @@
 <template>
   <v-container fluid fill-height class="hero">
     <v-layout justify-center align-center column pa-5>
-      <div class="display-3 font-weight-black text-xs-center white--text">
+      <div class="display-3 font-weight-bold text-xs-center white--text">
         {{ appTitle }}
       </div>
       <!-- <div class="display-1 font-weight-bold text-xs-center">
