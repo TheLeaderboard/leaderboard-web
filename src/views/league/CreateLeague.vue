@@ -50,7 +50,7 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
-                    color="primary"
+                    color="success"
                     :disabled="!validInfo"
                     @click="el++">Next</v-btn>
                 </v-card-actions>
@@ -81,9 +81,9 @@
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn flat color="primary" @click="el--">Previous</v-btn>
+                  <v-btn flat color="warning darken-2" @click="el--">Previous</v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" @click="el++">Review</v-btn>
+                  <v-btn color="success" @click="el++">Review</v-btn>
                 </v-card-actions>
               </v-card>
             </v-stepper-content>
@@ -122,10 +122,10 @@
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn flat color="primary" @click="el--">Previous</v-btn>
+                  <v-btn flat color="warning darken-2" @click="el--">Previous</v-btn>
                   <v-spacer></v-spacer>
                   <v-btn
-                    color="primary"
+                    color="success"
                     :disabled="!validReview"
                     @click="createLeague">Create League</v-btn>
                 </v-card-actions>
