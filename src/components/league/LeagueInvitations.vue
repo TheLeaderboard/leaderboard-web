@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-toolbar color="primary lighten-2">
+      <v-toolbar color="grey lighten-1">
         <v-toolbar-title>
           {{ leagueInvitations.length > 0 ? "Pending Invitations" : "Invite a Friend" }}
         </v-toolbar-title>
@@ -20,6 +20,7 @@
         </v-btn>
         <v-btn
           icon
+          color="success"
           @click="isModalVisible = true">
           <v-icon>add</v-icon>
         </v-btn>

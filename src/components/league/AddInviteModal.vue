@@ -2,9 +2,9 @@
   <transition name="modal-fade">
     <div class="modal-backdrop">
       <v-layout align-center justify-center>
-        <v-flex xs12 xm8 lg4>
+        <v-flex xs12 xm8 lg4 class="pa-2">
           <v-card class="elevation-12">
-            <v-toolbar color="primary">
+            <v-toolbar color="primary" dark>
               <v-toolbar-title>Invite Friends</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
@@ -40,7 +40,7 @@
                 @click="$emit('close')">Cancel</v-btn>
               <v-spacer></v-spacer>
               <v-btn
-                color="primary"
+                color="success"
                 :disabled="!valid"
                 type="submit"
                 form="inviteForm">Send Invites</v-btn>

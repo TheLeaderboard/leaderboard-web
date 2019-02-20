@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-toolbar color="secondary lighten-2">
+    <v-toolbar color="grey lighten-1">
       <v-toolbar-title>
         Members
       </v-toolbar-title>
