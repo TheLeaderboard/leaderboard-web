@@ -37,7 +37,7 @@
       <v-toolbar-side-icon class="hidden-md-and-up" @click="drawer =!drawer"></v-toolbar-side-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
       <router-link to="/">
-        <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
+        <v-toolbar-title class="text-uppercase">{{ appTitle }}</v-toolbar-title>
       </router-link>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
       <div v-if="!isAuthenticated" class="hidden-sm-and-down">

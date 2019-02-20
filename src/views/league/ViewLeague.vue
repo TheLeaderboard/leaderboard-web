@@ -1,21 +1,21 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12 text-xs-center class="ma-2">
+      <v-flex xs12 text-xs-center class="pa-2">
         <div class="display-1 font-weight-medium">
           {{ leagueData.name }}
         </div>
       </v-flex>
-      <v-flex xs12 text-xs-center class="ma-2">
+      <v-flex xs12 text-xs-center class="pa-2">
         <div class="subheading">
           {{ leagueData.game_type.name }}
         </div>
       </v-flex>
-      <v-flex xs12 md6 lg4 class="ma-2">
+      <v-flex xs12 md6 lg4 class="pa-2">
         <LeagueMembers 
           :members="leagueData.members" />
       </v-flex>
-      <v-flex xs12 md6 lg4 class="ma-2">
+      <v-flex xs12 md6 lg4 class="pa-2">
         <LeagueInvitations 
           :leagueId="this.$route.params.id"/>
       </v-flex>
