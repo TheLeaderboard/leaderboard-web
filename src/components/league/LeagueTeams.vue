@@ -19,7 +19,8 @@
       </v-btn>
       <v-btn
         icon
-        color="success">
+        color="success"
+        :to="`/league/${leagueId}/team/create`">
         <v-icon>add</v-icon>
       </v-btn>
     </v-toolbar>

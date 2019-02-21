@@ -2,7 +2,8 @@
   <v-container>
     <v-layout row wrap>
       <v-flex v-if="myInvitations.length > 0" xs12 md6 lg4 class="pa-2">
-        <MyInvitations />
+        <MyInvitations 
+          @reloadData="reloadData"/>
       </v-flex>
       <v-flex xs12 md6 lg4 class="pa-2">
         <MyLeagues />
@@ -31,7 +32,14 @@ export default {
   },
   mounted() {
     // check for user invitations
+    this.$store.dispatch("loadMyLeagues");
     this.$store.dispatch("loadMyInvitations");
+  },
+  methods: {
+    reloadData() {
+      this.$store.dispatch("loadMyLeagues");
+      this.$store.dispatch("loadMyInvitations");
+    }
   }
 };
 </script>
