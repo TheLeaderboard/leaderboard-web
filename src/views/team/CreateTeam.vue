@@ -138,7 +138,11 @@ export default {
   },
   watch: {
     teamMembers: function(newVal) {
-      this.reviewTeamMembers = [this.userId, ...newVal];
+      if (this.userId === this.leagueData.commissioner) {
+        this.reviewTeamMembers = [...newVal];
+      } else {
+        this.reviewTeamMembers = [this.userId, ...newVal];
+      }
     }
   },
   methods: {

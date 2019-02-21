@@ -43,35 +43,20 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "LeagueTeams",
   data() {
     return {
-      showList: true,
-      leagueTeams: []
+      showList: true
     };
   },
   props: {
     leagueId: {
       type: String
+    },
+    leagueTeams: {
+      type: Array
     }
-  },
-  methods: {
-    loadLeagueTeams(leagueId) {
-      axios
-        .get(`${process.env.VUE_APP_API_BASE}/api/teams/league/${leagueId}`)
-        .then(res => {
-          this.leagueTeams = res.data.leagueTeams;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  },
-  mounted() {
-    this.loadLeagueTeams(this.leagueId);
   }
 };
 </script>
