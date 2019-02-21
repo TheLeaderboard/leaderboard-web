@@ -9,6 +9,7 @@ import Profile from "@/views/Profile.vue";
 import NotFound from "@/views/404.vue";
 import CreateLeague from "@/views/league/CreateLeague.vue";
 import ViewLeague from "@/views/league/ViewLeague.vue";
+import CreateTeam from "@/views/team/CreateTeam.vue";
 
 Vue.use(Router);
 
@@ -65,6 +66,14 @@ let router = new Router({
       path: "/league/:id",
       name: "leagueView",
       component: ViewLeague,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/league/:leagueId/team/create",
+      name: "teamCreate",
+      component: CreateTeam,
       meta: {
         requiresAuth: true
       }

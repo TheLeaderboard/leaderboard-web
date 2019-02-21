@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-toolbar color="red lighten-1">
+    <v-toolbar color="info">
       <v-toolbar-title>Pending Invitations</v-toolbar-title>
     </v-toolbar>
     <v-list two-line>
@@ -54,6 +54,7 @@ export default {
         )
         .then(res => {
           console.log(res);
+          this.$emit("reloadData");
         })
         .catch(err => {
           console.log(err);
