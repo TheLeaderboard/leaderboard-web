@@ -2,7 +2,7 @@
   <transition name="modal-fade">
     <div class="modal-backdrop">
       <v-layout align-center justify-center>
-        <v-flex xs12 xm8 lg4 class="pa-2">
+        <v-flex xs12 md8 lg4 class="pa-2">
           <v-card class="elevation-12">
             <v-toolbar color="primary" dark>
               <v-toolbar-title>Invite Friends</v-toolbar-title>
@@ -113,5 +113,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.modal-fade-enter,
+.modal-fade-leave-active {
+  opacity: 0;
+}
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.5s ease;
 }
 </style>
