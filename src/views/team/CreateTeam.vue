@@ -67,7 +67,7 @@
                       :rules="teamNameRules"
                       readonly></v-text-field>
                     <v-autocomplete
-                      v-model="reviewTeamMembersWatch"
+                      v-model="reviewTeamMembers"
                       hint="Team members"
                       persistent-hint
                       :rules="reviewTeamMembersRules"
@@ -116,7 +116,7 @@ export default {
       teamMembers: [],
       teamMemberOptions: [],
       reviewTeamMemberOptions: [],
-      reviewTeamMembersWatch: [],
+      reviewTeamMembers: [],
       teamName: "",
       teamMembersHint: "",
       teamNameRules: [v => (v || "").length > 0 || "Team name is required"],
@@ -138,7 +138,7 @@ export default {
   },
   watch: {
     teamMembers: function(newVal) {
-      this.reviewTeamMembersWatch = [this.userId, ...newVal];
+      this.reviewTeamMembers = [this.userId, ...newVal];
     }
   },
   methods: {
@@ -188,7 +188,21 @@ export default {
       }
     },
     createTeam() {
-      console.log("Create Team");
+      const teamData = {
+        teamName: this.teamName,
+        members: this.reviewTeamMembers,
+        leagueId: this.leagueData._id
+      };
+      axios
+        .post(`${process.env.VUE_APP_API_BASE}/api/teams/create`, teamData)
+        .then(res => {
+          if (res.data.success) {
+            this.$router.push(`/league/${this.leagueData._id}`);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   mounted() {

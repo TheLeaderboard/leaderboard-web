@@ -84,7 +84,6 @@ export default {
           inviteData
         )
         .then(res => {
-          console.log(res.data);
           if (res.data.success) {
             this.emailChips = [];
             this.$emit("reloadInvites");
