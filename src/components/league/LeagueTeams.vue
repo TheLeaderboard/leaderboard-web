@@ -24,6 +24,21 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-toolbar>
+    <v-list
+      v-if="leagueTeams.length > 0 && showList"
+      two-line>
+      <template v-for="(team, index) in leagueTeams">
+        <v-divider
+          v-if="index !== 0"
+          :key="`divider${index}`"></v-divider>
+        <v-list-tile
+          :key="index">
+          <v-list-tile-content>
+            <v-list-tile-title>{{ team.name }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
+    </v-list>
   </v-card>
 </template>
 
@@ -48,7 +63,6 @@ export default {
       axios
         .get(`${process.env.VUE_APP_API_BASE}/api/teams/league/${leagueId}`)
         .then(res => {
-          console.log(res);
           this.leagueTeams = res.data.leagueTeams;
         })
         .catch(err => {
