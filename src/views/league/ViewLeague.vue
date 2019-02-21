@@ -11,6 +11,10 @@
           {{ leagueData.game_type.name }}
         </div>
       </v-flex>
+      <v-flex xs12 md6 lg4 class="pa-2" v-if="leagueData.team_size > 1">
+        <LeagueTeams 
+          :leagueId="this.$route.params.id"/>
+      </v-flex>
       <v-flex xs12 md6 lg4 class="pa-2">
         <LeagueMembers 
           :members="leagueData.members" />
@@ -25,12 +29,14 @@
 
 <script>
 import axios from "axios";
+import LeagueTeams from "@/components/league/LeagueTeams.vue";
 import LeagueMembers from "@/components/league/LeagueMembers.vue";
 import LeagueInvitations from "@/components/league/LeagueInvitations.vue";
 
 export default {
   name: "ViewLeague",
   components: {
+    LeagueTeams: LeagueTeams,
     LeagueMembers: LeagueMembers,
     LeagueInvitations: LeagueInvitations
   },
