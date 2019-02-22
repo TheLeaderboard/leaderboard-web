@@ -96,19 +96,25 @@
                 <v-layout
                   wrap
                   align-center
-                  v-show="areTeamsSelected && leagueData.win_loss_only">
+                  v-show="true && leagueData.win_loss_only">
                   <v-flex xs12 class="pa-2 text-xs-center">
                     <div class="subheading">Who won?</div>
                   </v-flex>
                   <v-flex xs12 md5 class="pa-2 text-xs-center">
-                    <v-btn>
+                    <v-btn
+                      id="homeBtn"
+                      @click="selectWinner('home')"
+                      large>
                       {{ homeTeamName }}
                     </v-btn>
                   </v-flex>
                   <v-flex xs12 md2 class="pa-2">
                   </v-flex>
                   <v-flex xs12 md5 class="pa-5 text-xs-center">
-                    <v-btn>
+                    <v-btn
+                      id="awayBtn"
+                      @click="selectWinner('away')"
+                      large>
                       {{ awayTeamName }}
                     </v-btn>
                   </v-flex>
@@ -133,6 +139,9 @@
 </template>
 
 <script>
+import JQuery from "jquery";
+let $ = JQuery;
+
 export default {
   name: "NewScoreModal",
   data() {
@@ -174,19 +183,38 @@ export default {
         : "";
     },
     readyToSubmit() {
-      return (
-        this.areTeamsSelected &&
-        this.homeScore !== null &&
-        this.awayScore !== null
-      );
+      if (!this.leagueData.win_loss_only) {
+        return (
+          this.areTeamsSelected &&
+          this.homeScore !== null &&
+          this.awayScore !== null
+        );
+      } else {
+        return (
+          this.areTeamsSelected && this.selectedWinner !== ""
+        );
+      }
     }
   },
   methods: {
     saveScore() {
-      console.log(this.homeTeam);
-      console.log(this.awayTeam);
-      console.log(this.homeTeamName);
-      console.log(this.awayTeamName);
+      if (this.leagueData.win_loss_only) {
+        // submit win loss game
+      } else {
+        // submit scored game
+      }
+    },
+    selectWinner(team) {
+      if (team === "home") {
+        $("#homeBtn").addClass("selected-winner");
+        $("#awayBtn").removeClass("selected-winner");
+        this.selectedWinner = this.homeTeam;
+      } else {
+        $("#homeBtn").removeClass("selected-winner");
+        $("#awayBtn").addClass("selected-winner");
+        this.selectedWinner = this.awayTeam;
+      }
+
     }
   }
 };
@@ -203,6 +231,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.selected-winner {
+  background-color: #4CAF50 !important;
+  color: white;
 }
 .modal-fade-enter,
 .modal-fade-leave-active {
