@@ -255,22 +255,17 @@ export default {
   },
   methods: {
     saveScore() {
-      console.log(`Team size: ${this.leagueData.team_size}`);
-      console.log(`Win-loss-only: ${this.leagueData.win_loss_only}`);
-      console.log(`Home team: ${this.homeTeam}`);
-      console.log(`Away team: ${this.awayTeam}`);
-      console.log(`Home score: ${this.homeScore}`);
-      console.log(`Away score: ${this.awayScore}`);
-      console.log(`Selected winner: ${this.selectedWinner}`);
       const gameData = {
         win_loss_only: this.leagueData.win_loss_only,
         team_size: this.leagueData.team_size,
         home_team: this.homeTeam,
-        away_team: this.awayTeam
+        away_team: this.awayTeam,
+        league: this.leagueData._id,
+        season: this.leagueData.default_season
       };
       if (this.leagueData.win_loss_only) {
         // submit win loss game
-        gameData.selected_winner = this.selectWinner;
+        gameData.selected_winner = this.selectedWinner;
       } else {
         // submit scored game
         gameData.home_score = this.homeScore;
