@@ -3,7 +3,7 @@
     <v-toolbar color="grey lighten-1" elevation="3">
       <v-toolbar-title>My Leagues</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon to="/league/create" color="success">
+      <v-btn icon to="/league/create" color="secondary">
         <v-icon>add</v-icon>
       </v-btn>
     </v-toolbar>

@@ -9,7 +9,10 @@
             </v-toolbar>
             <v-card-text>
               <v-layout column>
-                <v-layout wrap align-center>
+                <v-layout
+                  wrap
+                  v-if="leagueData.team_size !== 1"
+                  align-center>
                   <v-flex xs12 class="pa-2 text-xs-center">
                     <div class="subheading">Teams</div>
                   </v-flex>
@@ -29,6 +32,33 @@
                       v-model="awayTeam"
                       :items="awayTeams"
                       item-text="name"
+                      item-value="_id"
+                      label="Away team"></v-select>
+                  </v-flex>
+                </v-layout>
+                <v-layout
+                  wrap
+                  v-if="leagueData.team_size === 1"
+                  align-center>
+                  <v-flex xs12 class="pa-2 text-xs-center">
+                    <div class="subheading">Players</div>
+                  </v-flex>
+                  <v-flex xs12 md5 class="pa-2">
+                    <v-select
+                      v-model="homeTeam"
+                      :items="homePlayers"
+                      item-text="username"
+                      item-value="_id"
+                      label="Home team"></v-select>
+                  </v-flex>
+                  <v-flex xs12 md2 class="pa-2 text-xs-center">
+                    <div class="subheading text-uppercase font-weight-bold">vs</div>
+                  </v-flex>
+                  <v-flex xs12 md5 class="pa-2">
+                    <v-select
+                      v-model="awayTeam"
+                      :items="awayPlayers"
+                      item-text="username"
                       item-value="_id"
                       label="Away team"></v-select>
                   </v-flex>
@@ -101,14 +131,20 @@
                     <div class="subheading">Who won?</div>
                   </v-flex>
                   <v-flex xs12 md5 class="pa-2 text-xs-center">
-                    <v-btn>
+                    <v-btn
+                      id="homeBtn"
+                      @click="selectWinner('home')"
+                      large>
                       {{ homeTeamName }}
                     </v-btn>
                   </v-flex>
                   <v-flex xs12 md2 class="pa-2">
                   </v-flex>
                   <v-flex xs12 md5 class="pa-5 text-xs-center">
-                    <v-btn>
+                    <v-btn
+                      id="awayBtn"
+                      @click="selectWinner('away')"
+                      large>
                       {{ awayTeamName }}
                     </v-btn>
                   </v-flex>
@@ -133,6 +169,9 @@
 </template>
 
 <script>
+import JQuery from "jquery";
+let $ = JQuery;
+
 export default {
   name: "NewScoreModal",
   data() {
@@ -141,7 +180,9 @@ export default {
       awayTeam: "",
       homeScore: null,
       awayScore: null,
-      scoreRules: [],
+      scoreRules: [
+        v => String(Number(v)) === v || "Score must be a whole number"
+      ],
       selectedWinner: ""
     };
   },
@@ -160,33 +201,82 @@ export default {
     awayTeams() {
       return this.leagueTeams.filter(team => team._id !== this.homeTeam);
     },
+    homePlayers() {
+      return this.leagueData.members.filter(
+        member => member._id !== this.awayTeam
+      );
+    },
+    awayPlayers() {
+      return this.leagueData.members.filter(
+        member => member._id !== this.homeTeam
+      );
+    },
     areTeamsSelected() {
       return this.homeTeam !== "" && this.awayTeam !== "";
     },
     homeTeamName() {
-      return this.homeTeam !== ""
-        ? this.leagueTeams.filter(team => team._id === this.homeTeam)[0].name
-        : "";
+      if (this.leagueData.team_size === 1) {
+        return this.homeTeam !== ""
+          ? this.leagueData.members.filter(
+              member => member._id === this.homeTeam
+            )[0].username
+          : "";
+      } else {
+        return this.homeTeam !== ""
+          ? this.leagueTeams.filter(team => team._id === this.homeTeam)[0].name
+          : "";
+      }
     },
     awayTeamName() {
-      return this.awayTeam !== ""
-        ? this.leagueTeams.filter(team => team._id === this.awayTeam)[0].name
-        : "";
+      if (this.leagueData.team_size === 1) {
+        return this.awayTeam !== ""
+          ? this.leagueData.members.filter(
+              member => member._id === this.awayTeam
+            )[0].username
+          : "";
+      } else {
+        return this.awayTeam !== ""
+          ? this.leagueTeams.filter(team => team._id === this.awayTeam)[0].name
+          : "";
+      }
     },
     readyToSubmit() {
-      return (
-        this.areTeamsSelected &&
-        this.homeScore !== null &&
-        this.awayScore !== null
-      );
+      if (!this.leagueData.win_loss_only) {
+        return (
+          this.areTeamsSelected &&
+          this.homeScore !== null &&
+          this.awayScore !== null
+        );
+      } else {
+        return this.areTeamsSelected && this.selectedWinner !== "";
+      }
     }
   },
   methods: {
     saveScore() {
-      console.log(this.homeTeam);
-      console.log(this.awayTeam);
-      console.log(this.homeTeamName);
-      console.log(this.awayTeamName);
+      console.log(`Team size: ${this.leagueData.team_size}`);
+      console.log(`Win-loss-only: ${this.leagueData.win_loss_only}`);
+      console.log(`Home team: ${this.homeTeam}`);
+      console.log(`Away team: ${this.awayTeam}`);
+      console.log(`Home score: ${this.homeScore}`);
+      console.log(`Away score: ${this.awayScore}`);
+      console.log(`Selected winner: ${this.selectedWinner}`);
+      if (this.leagueData.win_loss_only) {
+        // submit win loss game
+      } else {
+        // submit scored game
+      }
+    },
+    selectWinner(team) {
+      if (team === "home") {
+        $("#homeBtn").addClass("selected-winner");
+        $("#awayBtn").removeClass("selected-winner");
+        this.selectedWinner = this.homeTeam;
+      } else {
+        $("#homeBtn").removeClass("selected-winner");
+        $("#awayBtn").addClass("selected-winner");
+        this.selectedWinner = this.awayTeam;
+      }
     }
   }
 };
@@ -203,6 +293,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.selected-winner {
+  background-color: #4caf50 !important;
+  color: white;
 }
 .modal-fade-enter,
 .modal-fade-leave-active {

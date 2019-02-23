@@ -19,7 +19,7 @@
       </v-btn>
       <v-btn
         icon
-        color="success"
+        color="secondary"
         :to="`/league/${leagueId}/team/create`">
         <v-icon>add</v-icon>
       </v-btn>
