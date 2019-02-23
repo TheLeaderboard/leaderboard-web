@@ -15,7 +15,7 @@
         <v-btn
           large
           @click="newScoreModalVisible = true"
-          color="success">New Game</v-btn>
+          color="secondary">New Game</v-btn>
       </v-flex>
       <v-flex xs12 md6 lg4 class="pa-2" v-if="leagueData.team_size > 1">
         <LeagueTeams 

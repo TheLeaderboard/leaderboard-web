@@ -20,7 +20,7 @@
         </v-btn>
         <v-btn
           icon
-          color="success"
+          color="secondary"
           @click="isModalVisible = true">
           <v-icon>add</v-icon>
         </v-btn>
