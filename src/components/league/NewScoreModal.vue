@@ -169,6 +169,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import JQuery from "jquery";
 let $ = JQuery;
 
@@ -261,11 +262,29 @@ export default {
       console.log(`Home score: ${this.homeScore}`);
       console.log(`Away score: ${this.awayScore}`);
       console.log(`Selected winner: ${this.selectedWinner}`);
+      const gameData = {
+        win_loss_only: this.leagueData.win_loss_only,
+        team_size: this.leagueData.team_size,
+        home_team: this.homeTeam,
+        away_team: this.awayTeam
+      };
       if (this.leagueData.win_loss_only) {
         // submit win loss game
+        gameData.selected_winner = this.selectWinner;
       } else {
         // submit scored game
+        gameData.home_score = this.homeScore;
+        gameData.away_score = this.awayScore;
       }
+      axios
+        .post(`${process.env.VUE_APP_API_BASE}/api/games/create`, gameData)
+        .then(res => {
+          console.log(res);
+          // clear modal data and dismiss modal
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     selectWinner(team) {
       if (team === "home") {
