@@ -274,8 +274,16 @@ export default {
       axios
         .post(`${process.env.VUE_APP_API_BASE}/api/games/create`, gameData)
         .then(res => {
-          console.log(res);
           // clear modal data and dismiss modal
+          if (res.data.success) {
+            this.homeTeam = "";
+            this.awayTeam = "";
+            this.homeScore = null;
+            this.awayScore = null;
+            this.selectedWinner = "";
+            this.$emit("close");
+            this.$emit("reloadGames");
+          }
         })
         .catch(err => {
           console.log(err);

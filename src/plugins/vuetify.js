@@ -1,9 +1,12 @@
 import Vue from "vue";
-import Vuetify from "vuetify/lib";
+import Vuetify, { VLayout } from "vuetify/lib";
 import "vuetify/src/stylus/app.styl";
 import "../stylus/main.styl";
 
 Vue.use(Vuetify, {
+  components: {
+    VLayout
+  },
   theme: {
     primary: "#004865",
     secondary: "#D15F6E",
