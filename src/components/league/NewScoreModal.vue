@@ -169,6 +169,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import JQuery from "jquery";
 let $ = JQuery;
 
@@ -254,18 +255,39 @@ export default {
   },
   methods: {
     saveScore() {
-      console.log(`Team size: ${this.leagueData.team_size}`);
-      console.log(`Win-loss-only: ${this.leagueData.win_loss_only}`);
-      console.log(`Home team: ${this.homeTeam}`);
-      console.log(`Away team: ${this.awayTeam}`);
-      console.log(`Home score: ${this.homeScore}`);
-      console.log(`Away score: ${this.awayScore}`);
-      console.log(`Selected winner: ${this.selectedWinner}`);
+      const gameData = {
+        win_loss_only: this.leagueData.win_loss_only,
+        team_size: this.leagueData.team_size,
+        home_team: this.homeTeam,
+        away_team: this.awayTeam,
+        league: this.leagueData._id,
+        season: this.leagueData.default_season
+      };
       if (this.leagueData.win_loss_only) {
         // submit win loss game
+        gameData.selected_winner = this.selectedWinner;
       } else {
         // submit scored game
+        gameData.home_score = this.homeScore;
+        gameData.away_score = this.awayScore;
       }
+      axios
+        .post(`${process.env.VUE_APP_API_BASE}/api/games/create`, gameData)
+        .then(res => {
+          // clear modal data and dismiss modal
+          if (res.data.success) {
+            this.homeTeam = "";
+            this.awayTeam = "";
+            this.homeScore = null;
+            this.awayScore = null;
+            this.selectedWinner = "";
+            this.$emit("close");
+            this.$emit("reloadGames");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     selectWinner(team) {
       if (team === "home") {

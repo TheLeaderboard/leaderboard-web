@@ -17,10 +17,15 @@
           @click="newScoreModalVisible = true"
           color="secondary">New Game</v-btn>
       </v-flex>
+      <v-flex xs12 lg10 offset-lg1 class="pa-2">
+        <RecentLeagueGames 
+          :leagueId="$route.params.id"
+          ref="recentLeagueGames"/>
+      </v-flex>
       <v-flex xs12 md6 lg4 class="pa-2" v-if="leagueData.team_size > 1">
         <LeagueTeams 
-          :leagueId="this.$route.params.id"
-          :leagueTeams="this.leagueTeams"/>
+          :leagueId="$route.params.id"
+          :leagueTeams="leagueTeams"/>
       </v-flex>
       <v-flex xs12 md6 lg4 class="pa-2">
         <LeagueMembers 
@@ -28,7 +33,7 @@
       </v-flex>
       <v-flex xs12 md6 lg4 class="pa-2">
         <LeagueInvitations 
-          :leagueId="this.$route.params.id"/>
+          :leagueId="$route.params.id"/>
       </v-flex>
     </v-layout>
     <NewScoreModal
@@ -36,12 +41,13 @@
       :leagueData="leagueData"
       v-if="newScoreModalVisible"
       @close="newScoreModalVisible = false"
-      @reloadGames="loadLeagueGames(this.$route.params.id)"/>
+      @reloadGames="loadLeagueGames"/>
   </v-container>
 </template>
 
 <script>
 import axios from "axios";
+import RecentLeagueGames from "@/components/league/RecentLeagueGames.vue";
 import LeagueTeams from "@/components/league/LeagueTeams.vue";
 import LeagueMembers from "@/components/league/LeagueMembers.vue";
 import LeagueInvitations from "@/components/league/LeagueInvitations.vue";
@@ -50,6 +56,7 @@ import NewScoreModal from "@/components/league/NewScoreModal.vue";
 export default {
   name: "ViewLeague",
   components: {
+    RecentLeagueGames: RecentLeagueGames,
     LeagueTeams: LeagueTeams,
     LeagueMembers: LeagueMembers,
     LeagueInvitations: LeagueInvitations,
@@ -91,9 +98,9 @@ export default {
           console.log(err);
         });
     },
-    loadLeagueGames(leagueId) {
-      console.log(leagueId);
-      console.log("reload games");
+    loadLeagueGames() {
+      // load games in child component
+      this.$refs.recentLeagueGames.loadGames();
     }
   }
 };
