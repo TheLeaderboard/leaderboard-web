@@ -101,14 +101,23 @@ export default {
         hour = 12;
       } else if (hour > 12) {
         hour = hour - 12;
-        ampm = "PM"
+        ampm = "PM";
       }
       let minute = newDate.getMinutes();
       if (minute < 10) {
         minute = "0" + minute;
       }
       let dateString = "";
-      dateString += days[newDate.getDay()] + " " + newDate.getMonth() + 1 + "/" + newDate.getUTCDate() + "/" + newDate.getUTCFullYear() + " ";
+      dateString +=
+        days[newDate.getDay()] +
+        " " +
+        newDate.getMonth() +
+        1 +
+        "/" +
+        newDate.getUTCDate() +
+        "/" +
+        newDate.getUTCFullYear() +
+        " ";
       dateString += hour + ":" + minute + " " + ampm;
       return dateString;
     },

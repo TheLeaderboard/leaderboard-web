@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-toolbar color="info">
-      <v-toolbar-title>Pending Invitations</v-toolbar-title>
+      <v-toolbar-title>Invitations</v-toolbar-title>
     </v-toolbar>
     <v-list two-line>
       <template v-for="(invitation, index) in myInvitations">

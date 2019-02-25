@@ -6,7 +6,6 @@ import Login from "@/views/Login.vue";
 import store from "@/store";
 import Landing from "@/views/Landing.vue";
 import Profile from "@/views/Profile.vue";
-import NotFound from "@/views/404.vue";
 import CreateLeague from "@/views/league/CreateLeague.vue";
 import ViewLeague from "@/views/league/ViewLeague.vue";
 import CreateTeam from "@/views/team/CreateTeam.vue";
@@ -80,8 +79,7 @@ let router = new Router({
     },
     {
       path: "/*",
-      name: "notFound",
-      component: NotFound
+      redirect: "/home"
     }
   ]
 });
