@@ -58,6 +58,9 @@
 import FullScreenLoadingModal from "@/components/layout/FullScreenLoadingModal.vue";
 
 export default {
+  components: {
+    FullScreenLoadingModal: FullScreenLoadingModal
+  },
   data: () => ({
     loading: false,
     valid: false,
