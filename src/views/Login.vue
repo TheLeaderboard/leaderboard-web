@@ -32,12 +32,19 @@
                 </v-form>
             </v-flex>
         </v-layout>
+        <FullScreenLoadingModal v-if="loading"/>
     </v-container>
 </template>
 
 <script>
+import FullScreenLoadingModal from "@/components/layout/FullScreenLoadingModal.vue";
+
 export default {
+  components: {
+    FullScreenLoadingModal: FullScreenLoadingModal
+  },
   data: () => ({
+    loading: false,
     valid: false,
     email: "",
     emailRules: [
@@ -53,6 +60,7 @@ export default {
   methods: {
     submitLogin() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
         this.$store.dispatch("loginUser", {
           email: this.email,
           password: this.password

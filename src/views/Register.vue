@@ -50,12 +50,16 @@
                 </v-form>
             </v-flex>
         </v-layout>
+        <FullScreenLoadingModal v-if="loading"/>
     </v-container>
 </template>
 
 <script>
+import FullScreenLoadingModal from "@/components/layout/FullScreenLoadingModal.vue";
+
 export default {
   data: () => ({
+    loading: false,
     valid: false,
     username: "",
     usernameRules: [v => !!v || "Username is required"],
@@ -77,6 +81,7 @@ export default {
   methods: {
     submitRegister() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
         this.$store.dispatch("registerUser", {
           name: this.name,
           username: this.username,
