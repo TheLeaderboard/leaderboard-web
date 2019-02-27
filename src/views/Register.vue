@@ -55,6 +55,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import setAuthToken from "@/utils/setAuthToken";
+import jwtDecode from "jwt-decode";
 import FullScreenLoadingModal from "@/components/layout/FullScreenLoadingModal.vue";
 
 export default {
@@ -85,13 +88,28 @@ export default {
     submitRegister() {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        this.$store.dispatch("registerUser", {
+        const userData = {
           name: this.name,
           username: this.username,
           email: this.email,
           password: this.password,
           password2: this.confirmPassword
-        });
+        };
+        axios
+          .post(`${process.env.VUE_APP_API_BASE}/api/users/register`, userData)
+          .then(res => {
+            const { token } = res.data.token;
+            localStorage.setItem("jwtToken", token);
+            setAuthToken(token);
+            const decoded = jwtDecode(token);
+            this.$store.dispatch("setCurrentUser", decoded);
+            this.loading = false;
+            this.$router.push("/home");
+          })
+          .catch(err => {
+            console.log(err);
+            this.loading = false;
+          });
       }
     }
   }

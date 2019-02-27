@@ -37,6 +37,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import setAuthToken from "@/utils/setAuthToken";
+import jwtDecode from "jwt-decode";
 import FullScreenLoadingModal from "@/components/layout/FullScreenLoadingModal.vue";
 
 export default {
@@ -61,10 +64,25 @@ export default {
     submitLogin() {
       if (this.$refs.form.validate()) {
         this.loading = true;
-        this.$store.dispatch("loginUser", {
+        const userData = {
           email: this.email,
           password: this.password
-        });
+        };
+        axios
+          .post(`${process.env.VUE_APP_API_BASE}/api/users/login`, userData)
+          .then(res => {
+            const { token } = res.data;
+            localStorage.setItem("jwtToken", token);
+            setAuthToken(token);
+            const decoded = jwtDecode(token);
+            this.$store.dispatch("setCurrentUser", decoded);
+            this.loading = false;
+            this.$router.push("/home");
+          })
+          .catch(err => {
+            console.log(err);
+            this.loading = false;
+          });
       }
     }
   }
