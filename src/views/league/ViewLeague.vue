@@ -74,18 +74,7 @@ export default {
   },
   mounted() {
     this.loadLeagueTeams(this.$route.params.id);
-    axios
-      .get(
-        `${process.env.VUE_APP_API_BASE}/api/leagues/${this.$route.params.id}`
-      )
-      .then(res => {
-        if (res.data.success) {
-          this.leagueData = res.data.league;
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.loadLeagueData(this.$route.params.id);
   },
   methods: {
     loadLeagueTeams(leagueId) {
@@ -98,9 +87,32 @@ export default {
           console.log(err);
         });
     },
+    async loadLeagueData(leagueId) {
+      axios
+        .get(`${process.env.VUE_APP_API_BASE}/api/leagues/${leagueId}`)
+        .then(res => {
+          if (res.data.success) {
+            this.leagueData = res.data.league;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     loadLeagueGames() {
       // load games in child component
       this.$refs.recentLeagueGames.loadGames();
+    }
+  },
+  watch: {
+    "$route.query.newScore": function(newScore) {
+      this.newScoreModalVisible = newScore;
+    },
+    "$route.params.id": async function(id) {
+      await this.loadLeagueData(id);
+      this.loadLeagueTeams(id);
+      this.loadLeagueGames();
+      this.newScoreModalVisible = this.$route.query.newScore;
     }
   }
 };

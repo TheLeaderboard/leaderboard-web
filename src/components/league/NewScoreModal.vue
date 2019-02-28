@@ -156,7 +156,7 @@
             <v-card-actions>
               <v-btn
                 color="warning"
-                @click="$emit('close')">Cancel</v-btn>
+                @click="closeModal">Cancel</v-btn>
               <v-spacer></v-spacer>
               <v-btn
                 color="success"
@@ -301,6 +301,12 @@ export default {
         $("#awayBtn").addClass("selected-winner");
         this.selectedWinner = this.awayTeam;
       }
+    },
+    closeModal() {
+      this.$emit("close");
+      let query = Object.assign({}, this.$route.query);
+      delete query.newScore;
+      this.$router.replace({ query });
     }
   }
 };
