@@ -28,12 +28,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setCurrentUser({ commit }, payload) {
+    setCurrentUser({ commit, dispatch }, payload) {
       commit("setUser", payload);
       if (payload === null) {
         commit("setIsAuthenticated", false);
       } else {
         commit("setIsAuthenticated", true);
+        dispatch("loadMyLeagues");
       }
     },
     logoutUser({ dispatch }) {
