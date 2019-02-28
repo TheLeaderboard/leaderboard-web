@@ -1,6 +1,6 @@
 <template>
-  <v-card v-if="leagueGames.length > 0">
-    <v-toolbar color="grey lighten-1">
+  <v-card v-if="leagueGames.length > 0" elevation="1">
+    <v-toolbar color="grey lighten-1" dense flat>
       <v-toolbar-title>Recent Games</v-toolbar-title>
     </v-toolbar>
     <v-container fluid grid-list-md>
@@ -15,12 +15,12 @@
           slot="item"
           slot-scope="props"
           xs12 sm6 md4 lg3>
-          <v-card>
+          <v-card elevation="1">
             <v-card-title>
               <h4>{{ formatDate(props.item.game_date) }}</h4>
             </v-card-title>
             <v-divider></v-divider>
-            <v-list>
+            <v-list dense>
               <v-list-tile>
                 <v-list-tile-action>
                   <v-icon

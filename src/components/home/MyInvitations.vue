@@ -1,9 +1,9 @@
 <template>
-  <v-card>
-    <v-toolbar color="info">
+  <v-card elevation="1">
+    <v-toolbar color="info" dense flat>
       <v-toolbar-title>Invitations</v-toolbar-title>
     </v-toolbar>
-    <v-list two-line>
+    <v-list two-line dense>
       <template v-for="(invitation, index) in myInvitations">
         <v-divider
           v-if="index !== 0"

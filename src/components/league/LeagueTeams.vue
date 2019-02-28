@@ -1,6 +1,6 @@
 <template>
-  <v-card>
-    <v-toolbar color="grey lighten-1">
+  <v-card elevation="1">
+    <v-toolbar color="grey lighten-1" dense flat>
       <v-toolbar-title>
         Teams
       </v-toolbar-title>
@@ -26,6 +26,7 @@
     </v-toolbar>
     <v-list
       v-if="leagueTeams.length > 0 && showList"
+      dense
       two-line>
       <template v-for="(team, index) in leagueTeams">
         <v-divider

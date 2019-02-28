@@ -4,7 +4,7 @@
       <v-layout align-center justify-center>
         <v-flex xs12 md8 lg6 class="pa-2">
           <v-card class="elevation-12">
-            <v-toolbar color="primary" dark>
+            <v-toolbar color="primary" dark dense flat>
               <v-toolbar-title>New Game</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
@@ -13,10 +13,10 @@
                   wrap
                   v-if="leagueData.team_size !== 1"
                   align-center>
-                  <v-flex xs12 class="pa-2 text-xs-center">
+                  <v-flex xs12 class="pa-1 text-xs-center">
                     <div class="subheading">Teams</div>
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-2">
+                  <v-flex xs12 md5 class="pa-1">
                     <v-select
                       v-model="homeTeam"
                       :items="homeTeams"
@@ -27,7 +27,7 @@
                   <v-flex xs12 md2 class="pa-2 text-xs-center">
                     <div class="subheading text-uppercase font-weight-bold">vs</div>
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-2">
+                  <v-flex xs12 md5 class="pa-1">
                     <v-select
                       v-model="awayTeam"
                       :items="awayTeams"
@@ -40,27 +40,27 @@
                   wrap
                   v-if="leagueData.team_size === 1"
                   align-center>
-                  <v-flex xs12 class="pa-2 text-xs-center">
+                  <v-flex xs12 class="pa-1 text-xs-center">
                     <div class="subheading">Players</div>
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-2">
+                  <v-flex xs12 md5 class="pa-1">
                     <v-select
                       v-model="homeTeam"
                       :items="homePlayers"
                       item-text="username"
                       item-value="_id"
-                      label="Home team"></v-select>
+                      label="Player one"></v-select>
                   </v-flex>
-                  <v-flex xs12 md2 class="pa-2 text-xs-center">
+                  <v-flex xs12 md2 class="pa-1 text-xs-center">
                     <div class="subheading text-uppercase font-weight-bold">vs</div>
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-2">
+                  <v-flex xs12 md5 class="pa-1">
                     <v-select
                       v-model="awayTeam"
                       :items="awayPlayers"
                       item-text="username"
                       item-value="_id"
-                      label="Away team"></v-select>
+                      label="Player two"></v-select>
                   </v-flex>
                 </v-layout>
                 <v-layout
@@ -68,10 +68,10 @@
                   align-center
                   v-show="areTeamsSelected && !leagueData.win_loss_only"
                   class="hidden-sm-and-down">
-                  <v-flex xs12 class="pa-2 text-xs-center">
+                  <v-flex xs12 class="pa-1 text-xs-center">
                     <div class="subheading">Score</div>
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-2 text-xs-center">
+                  <v-flex xs12 md5 class="pa-1 text-xs-center">
                     <v-text-field
                       type="number"
                       v-model="homeScore"
@@ -80,9 +80,9 @@
                       :rules="scoreRules"
                       outline></v-text-field>
                   </v-flex>
-                  <v-flex xs12 md2 class="pa-2">
+                  <v-flex xs12 md2 class="pa-1">
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-2 text-xs-center">
+                  <v-flex xs12 md5 class="pa-1 text-xs-center">
                     <v-text-field
                       type="number"
                       v-model="awayScore"
@@ -97,10 +97,10 @@
                   align-center
                   v-show="areTeamsSelected && !leagueData.win_loss_only"
                   class="hidden-md-and-up">
-                  <v-flex xs12 class="pa-2 text-xs-center">
+                  <v-flex xs12 class="pa-1 text-xs-center">
                     <div class="subheading">Score</div>
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-2 text-xs-center">
+                  <v-flex xs12 md5 class="pa-1 text-xs-center">
                     <v-text-field
                       type="number"
                       :label="`${homeTeamName} score`"
@@ -110,9 +110,9 @@
                       :rules="scoreRules"
                       outline></v-text-field>
                   </v-flex>
-                  <v-flex xs12 md2 class="pa-2">
+                  <v-flex xs12 md2 class="pa-1">
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-2 text-xs-center">
+                  <v-flex xs12 md5 class="pa-1 text-xs-center">
                     <v-text-field
                       type="number"
                       :label="`${awayTeamName} score`"
@@ -127,22 +127,24 @@
                   wrap
                   align-center
                   v-show="areTeamsSelected && leagueData.win_loss_only">
-                  <v-flex xs12 class="pa-2 text-xs-center">
+                  <v-flex xs12 class="pa-1 text-xs-center">
                     <div class="subheading">Who won?</div>
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-2 text-xs-center">
+                  <v-flex xs12 md5 class="pa-1 text-xs-center">
                     <v-btn
                       id="homeBtn"
+                      class="text-none"
                       @click="selectWinner('home')"
                       large>
                       {{ homeTeamName }}
                     </v-btn>
                   </v-flex>
-                  <v-flex xs12 md2 class="pa-2">
+                  <v-flex xs12 md2 class="pa-1">
                   </v-flex>
-                  <v-flex xs12 md5 class="pa-5 text-xs-center">
+                  <v-flex xs12 md5 class="pa-1 text-xs-center">
                     <v-btn
                       id="awayBtn"
+                      class="text-none"
                       @click="selectWinner('away')"
                       large>
                       {{ awayTeamName }}

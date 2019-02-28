@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-layout row justify-center wrap>
-      <v-flex xs12 class="text-xs-center pa-2">
+      <v-flex xs12 class="text-xs-center pa-1">
         <div class="headline">New League</div>
       </v-flex>
-      <v-flex xs12 md10 lg6 class="pa-2">
-        <v-stepper v-model="el">
+      <v-flex xs12 md10 lg6 class="pa-1">
+        <v-stepper v-model="el" class="elevation-1">
           <v-stepper-header>
             <v-stepper-step 
               step="1"
