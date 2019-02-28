@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-card>
-      <v-toolbar color="grey lighten-1">
+    <v-card elevation="1">
+      <v-toolbar color="grey lighten-1" dense flat>
         <v-toolbar-title>
           {{ leagueInvitations.length > 0 ? "Pending Invitations" : "Invite a Friend" }}
         </v-toolbar-title>
@@ -13,8 +13,7 @@
           <v-icon>expand_more</v-icon>
         </v-btn>
         <v-btn
-          icon
-          v-if="showList && leagueInvitations.length > 0"
+          icon          v-if="showList && leagueInvitations.length > 0"
           @click="showList = false">
           <v-icon>expand_less</v-icon>
         </v-btn>
@@ -27,6 +26,7 @@
       </v-toolbar>
       <v-list 
         v-if="leagueInvitations.length > 0 && showList"
+        dense
         two-line>
         <template v-for="(invitation, index) in leagueInvitations">
           <v-divider

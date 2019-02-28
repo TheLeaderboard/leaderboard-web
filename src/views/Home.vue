@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex v-if="myInvitations.length > 0" xs12 md6 lg4 class="pa-2">
+      <v-flex v-if="myInvitations.length > 0" xs12 md6 lg4 class="pa-1">
         <MyInvitations 
           @reloadData="reloadData"/>
       </v-flex>
-      <v-flex xs12 md6 lg4 class="pa-2">
+      <v-flex xs12 md6 lg4 class="pa-1">
         <MyLeagues />
       </v-flex>
     </v-layout>

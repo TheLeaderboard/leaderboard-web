@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12 text-xs-center class="pa-2">
+      <v-flex xs12 text-xs-center class="pa-1">
         <div class="display-1 font-weight-medium">
           {{ leagueData.name }}
         </div>
       </v-flex>
-      <v-flex xs12 text-xs-center class="pa-2">
+      <v-flex xs12 text-xs-center class="pa-1">
         <div class="subheading">
           {{ leagueData.game_type.name }}
         </div>
@@ -17,21 +17,21 @@
           @click="newScoreModalVisible = true"
           color="secondary">New Game</v-btn>
       </v-flex>
-      <v-flex xs12 lg10 offset-lg1 class="pa-2">
+      <v-flex xs12 lg10 offset-lg1 class="pa-1">
         <RecentLeagueGames 
           :leagueId="$route.params.id"
           ref="recentLeagueGames"/>
       </v-flex>
-      <v-flex xs12 md6 lg4 class="pa-2" v-if="leagueData.team_size > 1">
+      <v-flex xs12 md6 lg4 class="pa-1" v-if="leagueData.team_size > 1">
         <LeagueTeams 
           :leagueId="$route.params.id"
           :leagueTeams="leagueTeams"/>
       </v-flex>
-      <v-flex xs12 md6 lg4 class="pa-2">
+      <v-flex xs12 md6 lg4 class="pa-1">
         <LeagueMembers 
           :members="leagueData.members" />
       </v-flex>
-      <v-flex xs12 md6 lg4 class="pa-2">
+      <v-flex xs12 md6 lg4 class="pa-1">
         <LeagueInvitations 
           :leagueId="$route.params.id"/>
       </v-flex>
@@ -64,7 +64,7 @@ export default {
   },
   data() {
     return {
-      newScoreModalVisible: false,
+      newScoreModalVisible: this.$route.query.newscore,
       leagueData: {
         game_type: {},
         members: []

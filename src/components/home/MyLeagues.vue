@@ -1,13 +1,13 @@
 <template>
-  <v-card>
-    <v-toolbar color="grey lighten-1" elevation="3">
+  <v-card elevation="1">
+    <v-toolbar color="grey lighten-1" flat dense>
       <v-toolbar-title>My Leagues</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon to="/league/create" color="secondary">
         <v-icon>add</v-icon>
       </v-btn>
     </v-toolbar>
-    <v-list two-line>
+    <v-list two-line dense>
       <v-list-tile v-if="myLeagues.length === 0">
         <v-list-tile-title>No leagues yet</v-list-tile-title>
       </v-list-tile>

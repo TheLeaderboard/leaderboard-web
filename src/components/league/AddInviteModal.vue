@@ -4,7 +4,7 @@
       <v-layout align-center justify-center>
         <v-flex xs12 md8 lg4 class="pa-2">
           <v-card class="elevation-12">
-            <v-toolbar color="primary" dark>
+            <v-toolbar color="primary" dark dense flat>
               <v-toolbar-title>Invite Friends</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
