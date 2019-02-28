@@ -1,6 +1,6 @@
 <template>
   <span>
-    <v-navigation-drawer app v-model="drawer" class="primary darken-4" dark disable-resize-watcher>
+    <v-navigation-drawer app v-model="drawer" class="primary darken-2" dark disable-resize-watcher>
       <v-list>
         <div v-if="!isAuthenticated">
           <v-list-tile to="/login">
@@ -33,16 +33,45 @@
         </div>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app color="primary darken-2" dark dense flat>
+    <v-toolbar app color="primary darken-1" dark dense flat>
       <v-toolbar-side-icon class="hidden-md-and-up" @click="drawer =!drawer"></v-toolbar-side-icon>
-      <!-- <v-spacer class="hidden-md-and-up"></v-spacer> -->
       <router-link to="/">
         <v-toolbar-title class="text-uppercase">{{ appTitle }}</v-toolbar-title>
       </router-link>
-      <v-spacer class="hidden-sm-and-down"></v-spacer>
+      <v-spacer></v-spacer>
       <div v-if="!isAuthenticated" class="hidden-sm-and-down">
         <v-btn flat to="/login">Login</v-btn>
         <v-btn color="primary lighten-1" to="/register">Sign Up</v-btn>
+      </div>
+      <div v-if="isAuthenticated && myLeagues.length > 0">
+        <v-menu offset-y>
+          <v-btn
+            slot="activator"
+            icon>
+            <v-icon>add_box</v-icon>
+          </v-btn>
+          <v-list dense>
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title
+                  class="font-weight-bold">
+                  New Game
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-divider></v-divider>
+            <v-list-tile
+              v-for="(league, index) in myLeagues"
+              :key="index"
+              :to="`/league/${league.id}?newScore=true`">
+              <v-list-tile-content>
+                <v-list-tile-title>
+                  {{ league.name }}
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
       </div>
       <div v-if="isAuthenticated" class="hidden-sm-and-down">
         <v-btn flat to="/home">Home</v-btn>
@@ -65,6 +94,9 @@ export default {
   computed: {
     isAuthenticated() {
       return this.$store.state.isAuthenticated;
+    },
+    myLeagues() {
+      return this.$store.state.myLeagues;
     }
   },
   methods: {
