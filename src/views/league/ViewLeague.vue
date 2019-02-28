@@ -64,7 +64,7 @@ export default {
   },
   data() {
     return {
-      newScoreModalVisible: this.$route.query.newscore,
+      newScoreModalVisible: this.$route.query.newScore,
       leagueData: {
         game_type: {},
         members: []
