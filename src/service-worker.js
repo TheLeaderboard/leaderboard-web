@@ -1,7 +1,7 @@
 // cache index.html
 
-var CACHE_NAME = "version_01";
-var URLs = ["/", "/index.html"];
+var CACHE_NAME = "version_02";
+var URLs = ["/index.html"];
 
 // respond with cached resources
 self.addEventListener("fetch", function(event) {
