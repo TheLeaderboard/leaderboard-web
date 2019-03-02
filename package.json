@@ -7,7 +7,7 @@
     "build-staging": "vue-cli-service build --mode staging",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "nyc --reporter=lcov --reporter=text vue-cli-service test:unit"
+    "test:unit": "babel-node ./node_modules/.bin/isparta cover vue-cli-service test:unit './src/*'"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -20,6 +20,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/node": "^7.2.2",
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-plugin-e2e-cypress": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
@@ -32,7 +33,8 @@
     "chai": "^4.2.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "nyc": "^13.1.0",
+    "isparta": "^4.1.1",
+    "nyc": "^13.3.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.4.6",
