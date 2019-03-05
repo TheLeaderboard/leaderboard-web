@@ -35,7 +35,7 @@
     </v-navigation-drawer>
     <v-toolbar app color="primary darken-1" dark dense flat>
       <v-toolbar-side-icon class="hidden-md-and-up" @click="drawer =!drawer"></v-toolbar-side-icon>
-      <router-link to="/">
+      <router-link to="/home">
         <v-toolbar-title class="text-uppercase">{{ appTitle }}</v-toolbar-title>
       </router-link>
       <v-spacer></v-spacer>
