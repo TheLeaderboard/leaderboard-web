@@ -3,11 +3,13 @@
     <v-layout row wrap>
       <v-flex xs12 text-xs-center class="pa-1">
         <div class="display-1 font-weight-medium">
+          <SkeletonBox v-if="loadingData" width="30%"/>
           {{ leagueData.name }}
         </div>
       </v-flex>
       <v-flex xs12 text-xs-center class="pa-1">
         <div class="subheading">
+          <SkeletonBox v-if="loadingData" width="20%" />
           {{ leagueData.game_type.name }}
         </div>
       </v-flex>
@@ -52,15 +54,17 @@ import LeagueTeams from "@/components/league/LeagueTeams.vue";
 import LeagueMembers from "@/components/league/LeagueMembers.vue";
 import LeagueInvitations from "@/components/league/LeagueInvitations.vue";
 import NewScoreModal from "@/components/league/NewScoreModal.vue";
+import SkeletonBox from "@/components/layout/SkeletonBox.vue";
 
 export default {
   name: "ViewLeague",
   components: {
-    RecentLeagueGames: RecentLeagueGames,
-    LeagueTeams: LeagueTeams,
-    LeagueMembers: LeagueMembers,
-    LeagueInvitations: LeagueInvitations,
-    NewScoreModal: NewScoreModal
+    RecentLeagueGames,
+    LeagueTeams,
+    LeagueMembers,
+    LeagueInvitations,
+    NewScoreModal,
+    SkeletonBox
   },
   data() {
     return {
@@ -69,7 +73,8 @@ export default {
         game_type: {},
         members: []
       },
-      leagueTeams: []
+      leagueTeams: [],
+      loadingData: true,
     };
   },
   mounted() {
@@ -82,6 +87,7 @@ export default {
         .get(`${process.env.VUE_APP_API_BASE}/api/teams/league/${leagueId}`)
         .then(res => {
           this.leagueTeams = res.data.leagueTeams;
+          this.loadingData = false;
         })
         .catch(err => {
           console.log(err);
