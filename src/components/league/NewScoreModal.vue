@@ -20,6 +20,8 @@
                     <v-select
                       v-model="homeTeam"
                       :items="homeTeams"
+                      :loading="loadingTeams"
+                      no-data-text="No teams available"
                       item-text="name"
                       item-value="_id"
                       label="Home team"></v-select>
@@ -31,6 +33,8 @@
                     <v-select
                       v-model="awayTeam"
                       :items="awayTeams"
+                      :loading="loadingTeams"
+                      no-data-text="No teams available"
                       item-text="name"
                       item-value="_id"
                       label="Away team"></v-select>
@@ -47,6 +51,8 @@
                     <v-select
                       v-model="homeTeam"
                       :items="homePlayers"
+                      :loading="loadingData"
+                      no-data-text="No players available"
                       item-text="username"
                       item-value="_id"
                       label="Player one"></v-select>
@@ -58,6 +64,8 @@
                     <v-select
                       v-model="awayTeam"
                       :items="awayPlayers"
+                      :loading="loadingData"
+                      no-data-text="No players available"
                       item-text="username"
                       item-value="_id"
                       label="Player two"></v-select>
@@ -195,6 +203,12 @@ export default {
     },
     leagueData: {
       type: Object
+    },
+    loadingData: {
+      type: Boolean
+    },
+    loadingTeams: {
+      type: Boolean
     }
   },
   computed: {

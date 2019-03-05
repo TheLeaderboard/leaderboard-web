@@ -28,6 +28,21 @@
       v-if="leagueTeams.length > 0 && showList"
       dense
       two-line>
+      <v-list-tile v-if="loading">
+        <v-list-tile-content>
+          <v-list-tile-title>
+            <SkeletonBox width="30%"/>
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-divider v-if="loading"></v-divider>
+      <v-list-tile v-if="loading">
+        <v-list-tile-content>
+          <v-list-tile-title>
+            <SkeletonBox width="40%"/>
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
       <template v-for="(team, index) in leagueTeams">
         <v-divider
           v-if="index !== 0"
@@ -44,8 +59,13 @@
 </template>
 
 <script>
+import SkeletonBox from "@/components/layout/SkeletonBox.vue";
+
 export default {
   name: "LeagueTeams",
+  components: {
+    SkeletonBox
+  },
   data() {
     return {
       showList: true
@@ -57,6 +77,9 @@ export default {
     },
     leagueTeams: {
       type: Array
+    },
+    loading: {
+      type: Boolean
     }
   }
 };
