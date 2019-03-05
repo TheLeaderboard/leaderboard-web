@@ -26,11 +26,13 @@
       </v-flex>
       <v-flex xs12 md6 lg4 class="pa-1" v-if="leagueData.team_size > 1">
         <LeagueTeams 
+          :loading="loadingTeams"
           :leagueId="$route.params.id"
           :leagueTeams="leagueTeams"/>
       </v-flex>
       <v-flex xs12 md6 lg4 class="pa-1">
-        <LeagueMembers 
+        <LeagueMembers
+          :loading="loadingData"
           :members="leagueData.members" />
       </v-flex>
       <v-flex xs12 md6 lg4 class="pa-1">
@@ -75,19 +77,23 @@ export default {
       },
       leagueTeams: [],
       loadingData: true,
+      loadingTeams: true
     };
   },
-  mounted() {
+  async mounted() {
     this.loadLeagueTeams(this.$route.params.id);
     this.loadLeagueData(this.$route.params.id);
   },
   methods: {
+    sleep(milliseconds) {
+      return new Promise(resolve => setTimeout(resolve, milliseconds));
+    },
     loadLeagueTeams(leagueId) {
       axios
         .get(`${process.env.VUE_APP_API_BASE}/api/teams/league/${leagueId}`)
         .then(res => {
           this.leagueTeams = res.data.leagueTeams;
-          this.loadingData = false;
+          this.loadingTeams = false;
         })
         .catch(err => {
           console.log(err);
@@ -99,6 +105,7 @@ export default {
         .then(res => {
           if (res.data.success) {
             this.leagueData = res.data.league;
+            this.loadingData = false;
           }
         })
         .catch(err => {

@@ -19,9 +19,30 @@
       </v-btn>
     </v-toolbar>
     <v-list
-      v-if="members.length > 0 && showList"
+      v-if="(members.length > 0 || loading) && showList"
       dense
       two-line>
+      <v-list-tile v-if="loading">
+        <v-list-tile-content>
+          <v-list-tile-title>
+            <SkeletonBox :minWidth=15 :maxWidth=50 />
+          </v-list-tile-title>
+          <v-list-tile-sub-title>
+            <SkeletonBox :minWidth=10 :maxWidth=45 />
+          </v-list-tile-sub-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-divider v-if="loading"></v-divider>
+      <v-list-tile v-if="loading">
+        <v-list-tile-content>
+          <v-list-tile-title>
+            <SkeletonBox :minWidth=15 :maxWidth=50 />
+          </v-list-tile-title>
+          <v-list-tile-sub-title>
+            <SkeletonBox :minWidth=10 :maxWidth=45 />
+          </v-list-tile-sub-title>
+        </v-list-tile-content>
+      </v-list-tile>
       <template v-for="(member, index) in members">
         <v-divider
           v-if="index != 0"
@@ -39,8 +60,13 @@
 </template>
 
 <script>
+import SkeletonBox from "@/components/layout/SkeletonBox.vue";
+
 export default {
   name: "LeagueMembers",
+  components: {
+    SkeletonBox
+  },
   data() {
     return {
       showList: true
@@ -49,6 +75,9 @@ export default {
   props: {
     members: {
       type: Array
+    },
+    loading: {
+      type: Boolean
     }
   }
 };
