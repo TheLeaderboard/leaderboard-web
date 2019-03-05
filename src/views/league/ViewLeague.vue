@@ -43,6 +43,8 @@
     <NewScoreModal
       :leagueTeams="leagueTeams"
       :leagueData="leagueData"
+      :loadingData="loadingData"
+      :loadingTeams="loadingTeams"
       v-if="newScoreModalVisible"
       @close="newScoreModalVisible = false"
       @reloadGames="loadLeagueGames"/>
