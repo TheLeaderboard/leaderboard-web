@@ -65,7 +65,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true;
         const userData = {
-          email: this.email,
+          email: this.email.trim(),
           password: this.password
         };
         axios

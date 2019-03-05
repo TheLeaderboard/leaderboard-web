@@ -91,7 +91,7 @@ export default {
         const userData = {
           name: this.name,
           username: this.username,
-          email: this.email,
+          email: this.email.trim(),
           password: this.password,
           password2: this.confirmPassword
         };
