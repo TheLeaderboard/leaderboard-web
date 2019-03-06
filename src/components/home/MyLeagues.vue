@@ -8,8 +8,23 @@
       </v-btn>
     </v-toolbar>
     <v-list two-line dense>
-      <v-list-tile v-if="myLeagues.length === 0">
+      <v-list-tile v-if="myLeagues.length === 0 && !loading">
         <v-list-tile-title>No leagues yet</v-list-tile-title>
+      </v-list-tile>
+      <v-list-tile v-if="loading">
+        <v-list-tile-title>
+          <SkeletonBox 
+            :minWidth=20 
+            :maxWidth=40 />
+        </v-list-tile-title>
+      </v-list-tile>
+      <v-divider v-if="loading"></v-divider>
+      <v-list-tile v-if="loading">
+        <v-list-tile-title>
+          <SkeletonBox 
+            :minWidth=20 
+            :maxWidth=40 />
+        </v-list-tile-title>
       </v-list-tile>
       <template v-for="(league, index) in myLeagues">
         <v-divider
@@ -45,11 +60,19 @@
 </template>
 
 <script>
+import SkeletonBox from "@/components/layout/SkeletonBox.vue";
+
 export default {
   name: "MyLeagues",
+  components: {
+    SkeletonBox
+  },
   computed: {
     myLeagues() {
       return this.$store.state.myLeagues;
+    },
+    loading() {
+      return this.$store.state.loadingLeagues;
     }
   },
   mounted() {

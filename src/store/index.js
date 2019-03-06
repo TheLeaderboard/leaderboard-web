@@ -11,6 +11,7 @@ export default new Vuex.Store({
     user: null,
     isAuthenticated: false,
     myLeagues: [],
+    loadingLeagues: true,
     myInvitations: []
   },
   mutations: {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     setMyInvitations(state, payload) {
       state.myInvitations = payload;
+    },
+    setLoadingLeagues(state, payload) {
+      state.loadingLeagues = payload;
     }
   },
   actions: {
@@ -44,6 +48,7 @@ export default new Vuex.Store({
       router.push("/");
     },
     loadMyLeagues({ commit, state }) {
+      commit("setLoadingLeagues", true);
       axios
         .get(`${process.env.VUE_APP_API_BASE}/api/leagues`)
         .then(res => {
@@ -58,6 +63,7 @@ export default new Vuex.Store({
               });
             });
             commit("setMyLeagues", loadedLeagues);
+            commit("setLoadingLeagues", false);
           }
         })
         .catch(err => {
