@@ -48,7 +48,6 @@ export default new Vuex.Store({
       router.push("/");
     },
     loadMyLeagues({ commit, state }) {
-      commit("setLoadingLeagues", true);
       axios
         .get(`${process.env.VUE_APP_API_BASE}/api/leagues`)
         .then(res => {
