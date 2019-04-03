@@ -15,6 +15,7 @@
                     <v-text-field
                         v-model="email"
                         label="Email"
+                        autocomplete="email"
                         :rules="emailRules"
                         required
                     ></v-text-field>

@@ -23,30 +23,33 @@
                     label="Name"
                     :rules="nameRules"
                     required></v-text-field>
-                    <v-text-field
-                        v-model="email"
-                        label="Email"
-                        :rules="emailRules"
-                        required
-                    ></v-text-field>
-                    <v-text-field
-                        v-model="password"
-                        label="Password"
-                        type="password"
-                        :rules="passwordRules"
-                        required
-                    ></v-text-field>
-                    <v-text-field
-                        v-model="confirmPassword"
-                        label="Confirm password"
-                        type="password"
-                        :rules="confirmPasswordRules"
-                        required
-                    ></v-text-field>
-                    <v-btn
-                    :disabled="!valid"
-                    type="submit"
-                    form="registerForm">Sign up</v-btn>
+                  <v-text-field
+                      v-model="email"
+                      label="Email"
+                      autocomplete="email"
+                      :rules="emailRules"
+                      required
+                  ></v-text-field>
+                  <v-text-field
+                      v-model="password"
+                      label="Password"
+                      type="password"
+                      autocomplete="new-password"
+                      :rules="passwordRules"
+                      required
+                  ></v-text-field>
+                  <v-text-field
+                      v-model="confirmPassword"
+                      label="Confirm password"
+                      autocomplete="new-password"
+                      type="password"
+                      :rules="confirmPasswordRules"
+                      required
+                  ></v-text-field>
+                  <v-btn
+                  :disabled="!valid"
+                  type="submit"
+                  form="registerForm">Sign up</v-btn>
                 </v-form>
             </v-flex>
         </v-layout>
@@ -98,7 +101,7 @@ export default {
         axios
           .post(`${process.env.VUE_APP_API_BASE}/api/users/register`, userData)
           .then(res => {
-            const { token } = res.data.token;
+            const { token } = res.data;
             localStorage.setItem("jwtToken", token);
             setAuthToken(token);
             const decoded = jwtDecode(token);
