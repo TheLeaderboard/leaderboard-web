@@ -22,6 +22,7 @@
                         v-model="password"
                         label="Password"
                         type="password"
+                        autocomplete="current-password"
                         :rules="passwordRules"
                         required
                     ></v-text-field>
