@@ -15,6 +15,8 @@
                     <v-text-field
                         v-model="email"
                         label="Email"
+                        autocomplete="email"
+                        autofocus
                         :rules="emailRules"
                         required
                     ></v-text-field>
@@ -22,6 +24,7 @@
                         v-model="password"
                         label="Password"
                         type="password"
+                        autocomplete="current-password"
                         :rules="passwordRules"
                         required
                     ></v-text-field>
