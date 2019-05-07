@@ -40,7 +40,8 @@
             </v-list-tile-content>
             <v-list-tile-action>
               <v-icon
-                color="red">
+                color="red"
+                @click="cancelInvite(invitation)">
                 cancel
               </v-icon>
             </v-list-tile-action>
@@ -67,7 +68,8 @@ export default {
   },
   props: {
     leagueId: {
-      type: String
+      type: String,
+      required: true
     }
   },
   data() {
@@ -85,6 +87,20 @@ export default {
         )
         .then(res => {
           this.leagueInvitations = res.data.leagueInvitations;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    cancelInvite(invitation) {
+      axios
+        .put(
+          `${process.env.VUE_APP_API_BASE}/api/invitations/${invitation._id}`,
+          { accepted: false, leagueId: this.leagueId }
+        )
+        .then(res => {
+          console.log(res);
+          this.loadLeagueInvitations(this.leagueId);
         })
         .catch(err => {
           console.log(err);

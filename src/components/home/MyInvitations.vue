@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     respondToInvite(invitation, accepted) {
-      console.log(invitation._id);
       axios
         .put(
           `${process.env.VUE_APP_API_BASE}/api/invitations/${invitation._id}`,
