@@ -38,6 +38,12 @@
               <v-list-tile-title>{{ invitation.invited_email }}</v-list-tile-title>
               <v-list-tile-sub-title>Invited by {{ invitation.inviting_user.username }}</v-list-tile-sub-title>
             </v-list-tile-content>
+            <v-list-tile-action>
+              <v-icon
+                color="red">
+                cancel
+              </v-icon>
+            </v-list-tile-action>
           </v-list-tile>
         </template>
       </v-list>
