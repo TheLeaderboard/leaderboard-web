@@ -41,6 +41,7 @@
             <v-list-tile-action>
               <v-icon
                 color="red"
+                v-if="commissionerAccess"
                 @click="cancelInvite(invitation)">
                 cancel
               </v-icon>
@@ -70,6 +71,10 @@ export default {
     leagueId: {
       type: String,
       required: true
+    },
+    commissionerAccess: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -99,8 +104,9 @@ export default {
           { accepted: false, leagueId: this.leagueId }
         )
         .then(res => {
-          console.log(res);
-          this.loadLeagueInvitations(this.leagueId);
+          if (res.data.success) {
+            this.loadLeagueInvitations(this.leagueId);
+          }
         })
         .catch(err => {
           console.log(err);

@@ -37,7 +37,8 @@
       </v-flex>
       <v-flex xs12 md6 lg4 class="pa-1">
         <LeagueInvitations 
-          :leagueId="$route.params.id"/>
+          :leagueId="$route.params.id"
+          :commissionerAccess="userIsCommissioner"/>
       </v-flex>
     </v-layout>
     <NewScoreModal
@@ -128,6 +129,11 @@ export default {
       this.loadLeagueTeams(id);
       this.loadLeagueGames();
       this.newScoreModalVisible = this.$route.query.newScore;
+    }
+  },
+  computed: {
+    userIsCommissioner() {
+      return this.leagueData.commissioner === this.$store.state.user.id;
     }
   }
 };
