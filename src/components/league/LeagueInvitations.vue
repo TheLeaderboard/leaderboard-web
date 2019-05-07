@@ -38,6 +38,14 @@
               <v-list-tile-title>{{ invitation.invited_email }}</v-list-tile-title>
               <v-list-tile-sub-title>Invited by {{ invitation.inviting_user.username }}</v-list-tile-sub-title>
             </v-list-tile-content>
+            <v-list-tile-action>
+              <v-icon
+                color="red"
+                v-if="commissionerAccess"
+                @click="cancelInvite(invitation)">
+                cancel
+              </v-icon>
+            </v-list-tile-action>
           </v-list-tile>
         </template>
       </v-list>
@@ -61,7 +69,12 @@ export default {
   },
   props: {
     leagueId: {
-      type: String
+      type: String,
+      required: true
+    },
+    commissionerAccess: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -79,6 +92,21 @@ export default {
         )
         .then(res => {
           this.leagueInvitations = res.data.leagueInvitations;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    cancelInvite(invitation) {
+      axios
+        .put(
+          `${process.env.VUE_APP_API_BASE}/api/invitations/${invitation._id}`,
+          { accepted: false, leagueId: this.leagueId }
+        )
+        .then(res => {
+          if (res.data.success) {
+            this.loadLeagueInvitations(this.leagueId);
+          }
         })
         .catch(err => {
           console.log(err);
