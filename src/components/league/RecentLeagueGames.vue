@@ -5,16 +5,14 @@
     </v-toolbar>
     <v-container fluid grid-list-md>
       <v-data-iterator
-        :items=leagueGames
+        :items="leagueGames"
         :pagination.sync="pagination"
         :rows-per-page-items="rowsPerPage"
         content-tag="v-layout"
         row
-        wrap>
-        <v-flex
-          slot="item"
-          slot-scope="props"
-          xs12 sm6 md4 lg3>
+        wrap
+      >
+        <v-flex slot="item" slot-scope="props" xs12 sm6 md4 lg3>
           <v-card elevation="1">
             <v-card-title>
               <h4>{{ formatDate(props.item.game_date) }}</h4>
@@ -23,29 +21,29 @@
             <v-list dense>
               <v-list-tile>
                 <v-list-tile-action>
-                  <v-icon
-                    v-if="homeWinner(props.item)">chevron_right</v-icon>
+                  <v-icon v-if="homeWinner(props.item)">chevron_right</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
                   {{ homeTeamName(props.item) }}
                 </v-list-tile-content>
                 <v-list-tile-content
                   v-if="!props.item.win_loss_only"
-                  class="align-end">
+                  class="align-end"
+                >
                   {{ homeScore(props.item) }}
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
                 <v-list-tile-action>
-                  <v-icon
-                    v-if="awayWinner(props.item)">chevron_right</v-icon>
+                  <v-icon v-if="awayWinner(props.item)">chevron_right</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
                   {{ awayTeamName(props.item) }}
                 </v-list-tile-content>
                 <v-list-tile-content
                   v-if="!props.item.win_loss_only"
-                  class="align-end">
+                  class="align-end"
+                >
                   {{ awayScore(props.item) }}
                 </v-list-tile-content>
               </v-list-tile>
@@ -93,6 +91,7 @@ export default {
         });
     },
     formatDate(date) {
+      console.log(date);
       const days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
       let newDate = new Date(date);
       let hour = newDate.getHours();
@@ -111,8 +110,7 @@ export default {
       dateString +=
         days[newDate.getDay()] +
         " " +
-        newDate.getMonth() +
-        1 +
+        Number(newDate.getMonth() + 1) +
         "/" +
         newDate.getUTCDate() +
         "/" +
@@ -166,6 +164,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-</style>
