@@ -91,7 +91,6 @@ export default {
         });
     },
     formatDate(date) {
-      console.log(date);
       const days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
       let newDate = new Date(date);
       let hour = newDate.getHours();
