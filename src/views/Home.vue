@@ -2,8 +2,7 @@
   <v-container>
     <v-layout row wrap>
       <v-flex v-if="myInvitations.length > 0" xs12 md6 lg4 class="pa-1">
-        <MyInvitations 
-          @reloadData="reloadData"/>
+        <MyInvitations @reloadData="reloadData" />
       </v-flex>
       <v-flex xs12 md6 lg4 class="pa-1">
         <MyLeagues />
@@ -43,6 +42,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-</style>
