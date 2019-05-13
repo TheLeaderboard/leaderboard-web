@@ -13,31 +13,23 @@
       </v-list-tile>
       <v-list-tile v-if="loading">
         <v-list-tile-title>
-          <SkeletonBox 
-            :minWidth=20 
-            :maxWidth=40 />
+          <SkeletonBox :minWidth="20" :maxWidth="40" />
         </v-list-tile-title>
       </v-list-tile>
       <v-divider v-if="loading"></v-divider>
       <v-list-tile v-if="loading">
         <v-list-tile-title>
-          <SkeletonBox 
-            :minWidth=20 
-            :maxWidth=40 />
+          <SkeletonBox :minWidth="20" :maxWidth="40" />
         </v-list-tile-title>
       </v-list-tile>
       <template v-for="(league, index) in myLeagues">
-        <v-divider
-          v-if="index !== 0"
-          :key="`divider${index}`"></v-divider>
-        <v-list-tile
-          :key="index"
-          :to="`/league/${league.id}`">
+        <v-divider v-if="index !== 0" :key="`divider${index}`"></v-divider>
+        <v-list-tile :key="index" :to="`/league/${league.id}`">
           <v-list-tile-avatar>
             <v-tooltip top>
-              <v-icon
-                slot="activator"
-                v-if="league.commissioner">supervisor_account</v-icon>
+              <v-icon slot="activator" v-if="league.commissioner">
+                supervisor_account
+              </v-icon>
               <span>You manage this league</span>
             </v-tooltip>
           </v-list-tile-avatar>
@@ -80,6 +72,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-</style>

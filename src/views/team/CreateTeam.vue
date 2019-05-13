@@ -7,30 +7,27 @@
       <v-flex xs12 md10 lg6 class="pa-1">
         <v-stepper v-model="el" class="elevation-1">
           <v-stepper-header class="elevation-1">
-            <v-stepper-step
-              step="1"
-              :complete="el > 1"
-              editable>Team Information</v-stepper-step>
+            <v-stepper-step step="1" :complete="el > 1" editable>
+              Team Information
+            </v-stepper-step>
             <v-divider></v-divider>
-            <v-stepper-step
-              step="2"
-              :complete="el > 2"
-              :editable="validInfo">Review</v-stepper-step>
+            <v-stepper-step step="2" :complete="el > 2" :editable="validInfo">
+              Review
+            </v-stepper-step>
           </v-stepper-header>
           <v-stepper-items>
             <v-stepper-content step="1">
               <v-card>
                 <v-card-text>
-                  <v-form
-                    ref="teamInfoForm"
-                    v-model="validInfo">
+                  <v-form ref="teamInfoForm" v-model="validInfo">
                     <v-text-field
                       name="teamName"
                       label="Team name"
                       v-model="teamName"
                       :rules="teamNameRules"
                       autofocus
-                      required></v-text-field>
+                      required
+                    ></v-text-field>
                     <v-autocomplete
                       v-model="teamMembers"
                       :hint="teamMembersHint"
@@ -41,31 +38,30 @@
                       item-text="username"
                       item-value="_id"
                       multiple
-                      chips></v-autocomplete>
+                      chips
+                    ></v-autocomplete>
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn
-                    color="success"
-                    :disabled="!validInfo"
-                    @click="el++">Next</v-btn>
+                  <v-btn color="success" :disabled="!validInfo" @click="el++">
+                    Next
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-card>
                 <v-card-text>
-                  <v-form
-                    ref="reviewForm"
-                    v-model="validReview">
+                  <v-form ref="reviewForm" v-model="validReview">
                     <div class="headline">Team Information</div>
                     <v-text-field
                       name="teamName"
                       label="Team name"
                       v-model="teamName"
                       :rules="teamNameRules"
-                      readonly></v-text-field>
+                      readonly
+                    ></v-text-field>
                     <v-autocomplete
                       v-model="reviewTeamMembers"
                       hint="Team members"
@@ -77,19 +73,22 @@
                       item-value="_id"
                       multiple
                       readonly
-                      chips></v-autocomplete>
+                      chips
+                    ></v-autocomplete>
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn
-                    flat
-                    color="warning darken-2"
-                    @click="el--">Previous</v-btn>
+                  <v-btn flat color="warning darken-2" @click="el--">
+                    Previous
+                  </v-btn>
                   <v-spacer></v-spacer>
                   <v-btn
                     color="success"
                     :disabled="!validReview"
-                    @click="createTeam">Create Team</v-btn>
+                    @click="createTeam"
+                  >
+                    Create Team
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-stepper-content>
@@ -215,5 +214,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
